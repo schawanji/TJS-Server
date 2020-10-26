@@ -1,5 +1,5 @@
 # TJS-Server
-TJS-Server contain a web API that facilitate data joining operation based on OCG Table Joining Service TJS.
+TJS-Server contain a web API that facilitate data joining operation based on OCG  [Table Joining Service](http://www.opengeospatial.org/standards/tjs). TJS.
 
 # What is TJS?
 
