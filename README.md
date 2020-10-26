@@ -28,11 +28,11 @@ attribute2
 # Example:
 The url below accesses vector tiles that can be rendered in a GIS application that supports vector tiles in GeoJSON format.
 
-http://127.0.0.1:5000/tjs/api?vtc_url=[url]&attribute_url=[url]&framework_key=[key]&attribute1=[column_name]&attribute2=[column_name]
+'http://127.0.0.1:5000/tjs/api?vtc_url=[url]&attribute_url=[url]&framework_key=[key]&attribute1=[column_name]&attribute2=[column_name]'
 
 vtc_url points to a vector tile URL.vtc_url should take the form:
 
-http://localhost:8080/geoserver/gwc/tms/1.0.0/layername@grisetId@formatExtension/z/x/y.format
+'http://localhost:8080/geoserver/gwc/tms/1.0.0/layername@grisetId@formatExtension/z/x/y.format'
 
 z is zoom level
 x and y define a given tile coordinates
@@ -42,7 +42,7 @@ format refers to format of the vector tiles
 
 attribute_url points to a CSV file URL. attribute_url takes the form:
 
-http://127.0.0.1:8000/sample-csv.csv
+'http://127.0.0.1:8000/sample-csv.csv'
 
 framework_key, attribute1 and attribute2 are names of CSV columns.
 
