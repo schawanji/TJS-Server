@@ -46,7 +46,7 @@ http://127.0.0.1:8000/sample-csv.csv
 
 framework_key, attribute1 and attribute2 are names of CSV columns.
 
-# Illustration of how TJS-Server works 
+
 
 
 
