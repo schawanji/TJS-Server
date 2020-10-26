@@ -5,7 +5,7 @@ TJS-Server contain a web API that facilitate data joining operation based on OCG
 
 TJS is an OGC standard interface for joining tabular data to a geospatial framework. TJS-Server contain an API that takes in tabular data in CSV format and intergrate it with a vector tiles in GeoJSON format.
 
- #Manual installation of TJS-Server
+# Manual installation of TJS-Server
 
 Python 3x
 
