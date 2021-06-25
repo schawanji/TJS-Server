@@ -1,0 +1,38 @@
+attrs @ file:///home/conda/feedstock_root/build_artifacts/attrs_1620387926260/work
+certifi==2021.5.30
+click==7.1.2
+click-plugins==1.1.1
+cligj @ file:///home/conda/feedstock_root/build_artifacts/cligj_1622246659049/work
+cycler==0.10.0
+decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1621187651333/work
+Fiona==1.8.20
+Flask @ file:///home/conda/feedstock_root/build_artifacts/flask_1621629915293/work
+GDAL==3.3.0
+geopandas @ file:///home/conda/feedstock_root/build_artifacts/geopandas_1623249625470/work
+itsdangerous @ file:///home/conda/feedstock_root/build_artifacts/itsdangerous_1621360792037/work
+Jinja2 @ file:///home/conda/feedstock_root/build_artifacts/jinja2_1621419064915/work
+joblib @ file:///home/conda/feedstock_root/build_artifacts/joblib_1612898609989/work
+kiwisolver @ file:///D:/bld/kiwisolver_1610099953470/work
+mapclassify @ file:///home/conda/feedstock_root/build_artifacts/mapclassify_1608686039411/work
+MarkupSafe @ file:///D:/bld/markupsafe_1621455953770/work
+matplotlib @ file:///D:/bld/matplotlib-suite_1620506140045/work
+munch==2.5.0
+networkx==2.3
+numpy @ file:///D:/bld/numpy_1624400134018/work
+olefile @ file:///home/conda/feedstock_root/build_artifacts/olefile_1602866521163/work
+pandas @ file:///D:/bld/pandas_1624391191530/work
+Pillow @ file:///D:/bld/pillow_1621288269226/work
+pyparsing==2.4.7
+pyproj @ file:///D:/bld/pyproj_1623802040687/work
+python-dateutil==2.8.1
+python-dotenv==0.18.0
+pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1612179539967/work
+Rtree @ file:///D:/bld/rtree_1610147264740/work
+scikit-learn @ file:///D:/bld/scikit-learn_1619628870631/work
+scipy @ file:///C:/bld/scipy_1619562066759/work
+Shapely==1.7.1
+six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
+threadpoolctl @ file:///tmp/tmp79xdzxkt/threadpoolctl-2.1.0-py3-none-any.whl
+tornado @ file:///D:/bld/tornado_1610094910414/work
+Werkzeug @ file:///home/conda/feedstock_root/build_artifacts/werkzeug_1621518206714/work
+wincertstore==0.2
