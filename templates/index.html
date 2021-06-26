@@ -1,42 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link
-      href="{{url_for('static',filename='css/style.css')}}"
-      rel="stylesheet"
-    />
-      <script src="https://kit.fontawesome.com/e140c5afeb.js" crossorigin="anonymous"></script>
-    <title>{% block title %} GENERIC TITLE {% endblock %}</title>
-  </head>
-  <body>
+      {% extends "base.html"%}
+{% block content %}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">Demo</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Table Joining Service</a>
+    <div class="container">
+
+
+      <h1>OGC Table Joining Service </h1>
+      <p> Table Joining Service is an OGC standard for joining a geospatial framework with attribute data in tabular format.</p>
+
+      <div class="framework-info">
+          <h2>Vectortiles hosted on Geoserver</h2>
+
+      <ul class="content">
+        <li>
+          How to get an overview of all layers published in GeoWebCache <br />
+          <code>http://localhost:8080/geoserver/gwc/service/tms/1.0.0?</code>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/tjs">Get Requests</a>
+        <li>
+          Example HTTP request for viewing metadata about a specific layer<br />
+          <code
+            >http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson</code
+          >
+        </li>
+        <li>
+          <a
+            href="https://cartographymaster.eu/wp-content/theses/2020_Chawanji_Thesis.pdf"
+            >Read more</a
+          >
         </li>
       </ul>
-    </div>
-  </div>
-</nav>
-
-<br/>
-<div class="container">
-  <h1>Vector tiles - Table Joining Service</h1>
-<p>OGC standard</p></div>
-
-
-<script src="{{url_for('static',filename='js/index.js')}}"></script>
-  </body>
-</html>
+      </div>
+      </div>
+{% endblock  %}

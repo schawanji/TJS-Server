@@ -1,4 +1,4 @@
-folium==0.10.1
 geopandas==0.7.0
 Flask==1.1.2
 gunicorn==19.5.0
+requests

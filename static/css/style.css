@@ -3,8 +3,23 @@ body {
 }
 
 h1 {
-  font-size: 24px;
   margin-bottom: 10px;
 }
 
-li{list-style: none;}
+li {
+  list-style: none;
+  margin-bottom: 5px;
+  line-height: 24px;
+}
+.content li {
+  list-style: none;
+  margin-bottom: 5px;
+  line-height: 24px;
+  padding: 5px 5px;
+  border-radius: 5px;
+
+  background-color: antiquewhite;
+}
+.footer{ margin: 50px auto;
+font-size: 18px;
+text-align: center}

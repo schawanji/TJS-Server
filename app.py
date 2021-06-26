@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request
+import requests
 import geopandas as gpd
 import pandas as pd
 
 app = Flask(__name__)
 
+vt_source = 'http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson'
 
 def get_framework_data(FrameworkURI):
     gdf = gpd.read_file(FrameworkURI)
@@ -32,6 +34,21 @@ def index():
 def api():
     title = "Table Joining Service API"
     return render_template("tjs.html", title=title)
+
+@app.route('/tjs/attributes')
+def attributes():
+    title = "Table Joining Service API"
+    return render_template("attributes.html", title=title)
+
+@app.route('/tjs/frameworks', methods=['GET'])
+def get_frameworks():
+    geojson_vt = requests.get(vt_source)
+    vt_source_metadata = [geojson_vt.url]
+    if geojson_vt.status_code == 200:
+
+        return render_template("frameworks.html", vt_source_metadata=vt_source_metadata)
+    else:
+        return 'Check if URL is correct'
 
 
 @app.route('/tjs/api', methods=['GET'])
