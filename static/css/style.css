@@ -1,25 +1,37 @@
 body {
-  line-height: 16px;
+  line-height: 24px;
+  margin: 30px;
+  font-size: 12px;
 }
 
 h1 {
   margin-bottom: 10px;
+  font-size: 24px;
 }
 
 li {
   list-style: none;
   margin-bottom: 5px;
-  line-height: 24px;
 }
-.content li {
-  list-style: none;
-  margin-bottom: 5px;
-  line-height: 24px;
-  padding: 5px 5px;
-  border-radius: 5px;
 
-  background-color: antiquewhite;
+footer {
+  border-top: 1px solid #666;
+  padding: 10px 0;
+  color: #222;
+  line-height: 36px;
+  font-size:24px
+
+.main {
+  max-width: 80%;
 }
-.footer{ margin: 50px auto;
-font-size: 18px;
-text-align: center}
+
+.sidenav {
+  width: 130px;
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  left: 10px;
+  background: #eee;
+  overflow-x: hidden;
+  padding: 8px 0;
+}

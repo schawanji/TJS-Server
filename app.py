@@ -1,3 +1,4 @@
+import flask
 from flask import Flask, render_template, request
 import requests
 import geopandas as gpd
@@ -5,7 +6,14 @@ import pandas as pd
 
 app = Flask(__name__)
 
-vt_source = 'http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson'
+COVID_DATA_CSV = 'https://raw.githubusercontent.com/nytimes/covid-19-data/6a6a67340325c354e9ee4890816718391b47d9ac/us' \
+                 '-states.csv'
+FrameworkURI = "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson/0/0/0.geojson"
+
+GetDataURL = "http://127.0.0.1:5000/static/covid_data.csv"
+
+FrameworkKey = 'state'
+
 
 def get_framework_data(FrameworkURI):
     gdf = gpd.read_file(FrameworkURI)
@@ -17,11 +25,56 @@ def get_attribute_data(GetDataURL):
     return df
 
 
+#+print(get_attribute_data(GetDataURL))
+
+
 def get_framework_key(FrameworkKey, attribute1, attribute2):
     FrameworkKey = str(FrameworkKey)
     attribute_1 = str(attribute1)
     attribute_2 = str(attribute2)
     return [FrameworkKey, attribute_1, attribute_2]
+
+
+def get_framework_data(FrameworkURI):
+    gdf = gpd.read_file(FrameworkURI)
+    return gdf
+
+
+def attribute_csv(GetDataURL):
+    df = get_attribute_data(GetDataURL)
+
+    df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
+    filtered_df = df.query("date >= '2020-01-21' \
+                               and date < '2020-02-21'")
+    df = df.query("date == '2021-01-29'")
+    df = df[['state', 'deaths', 'cases']]
+    df.to_csv(r'static\covid_data.csv', index=False, header=True)
+    # Get url for a static file.
+    with app.test_request_context():
+        att_uri = flask.url_for("static", filename="covid_data.csv")
+        print(att_uri)
+    return df
+
+
+"""def joindata(FrameworkURI, GetDataURL, FrameworkKey):
+    # Joining operation.
+    gdf = get_framework_data(FrameworkURI)
+    df = get_attribute_data(GetDataURL)
+    frameworkKey = gdf['STATE_NAME']
+    dataKey = str(FrameworkKey)
+    df = df.rename(columns={dataKey: 'STATE_NAME'})
+    df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
+    filtered_df = df.query("date >= '2020-01-21' \
+                           and date < '2020-02-21'")
+    df = df.query("date == '2021-01-29'")
+    df = df[['STATE_NAME', 'deaths', 'cases']]
+    geometry = gdf[['geometry', 'STATE_NAME']]
+    geometry = geometry.merge(df, on='STATE_NAME').reindex(gdf.index)
+    geojson = geometry.to_json()
+    return geojson
+
+
+print(joindata(FrameworkURI, GetDataURL, FrameworkKey))"""
 
 
 @app.route('/')
@@ -30,25 +83,11 @@ def index():
     return render_template("index.html", title=title)
 
 
-@app.route('/tjs')
-def api():
-    title = "Table Joining Service API"
-    return render_template("tjs.html", title=title)
-
-@app.route('/tjs/attributes')
-def attributes():
-    title = "Table Joining Service API"
-    return render_template("attributes.html", title=title)
-
-@app.route('/tjs/frameworks', methods=['GET'])
-def get_frameworks():
-    geojson_vt = requests.get(vt_source)
-    vt_source_metadata = [geojson_vt.url]
-    if geojson_vt.status_code == 200:
-
-        return render_template("frameworks.html", vt_source_metadata=vt_source_metadata)
-    else:
-        return 'Check if URL is correct'
+@app.route('/tjs/framework', methods=['GET'])
+def get_framework():
+    gdf = gpd.read_file(FrameworkURI)
+    geojson = gdf.to_json()
+    return geojson
 
 
 @app.route('/tjs/api', methods=['GET'])

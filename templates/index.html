@@ -1,33 +1,79 @@
-      {% extends "base.html"%}
-{% block content %}
+{% extends "base.html"%} {% block content %}
 
-    <div class="container">
-
-
-      <h1>OGC Table Joining Service </h1>
-      <p> Table Joining Service is an OGC standard for joining a geospatial framework with attribute data in tabular format.</p>
-
-      <div class="framework-info">
-          <h2>Vectortiles hosted on Geoserver</h2>
-
-      <ul class="content">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3 ">
+      <ul class="sidenav">
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#table-joining-service">Table Joning Service</a></li>
+        <li><a href="#attribute-data">Attribute data</a></li>
         <li>
-          How to get an overview of all layers published in GeoWebCache <br />
-          <code>http://localhost:8080/geoserver/gwc/service/tms/1.0.0?</code>
+          <a href="#framework-data">Framework data</a>
+          <ul>
+            <li><a href="#vector-tiles">Vectortiles</a></li>
+            <li><a href="#vector-tile-caches">Vectortile caches</a></li>
+          </ul>
         </li>
-        <li>
-          Example HTTP request for viewing metadata about a specific layer<br />
-          <code
-            >http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson</code
-          >
-        </li>
-        <li>
+
+        <li><a href="#tjs-requests">TJS Get Requests</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9 main">
+      <div id="introduction">
+        <h1>Table Joining Service (TJS) for vectortiles spatial framework</h1>
+        <img src="http://geoprocessing.info/images/geolink.gif" alt="" />
+
+        <p>
+          This is a TJS implementaion prototype that supports join data
+          operation. It was built to examine the potential of using vectortile
+          caches as framework data for an TJS API based on OGC standards. This
+          work is based on a
           <a
             href="https://cartographymaster.eu/wp-content/theses/2020_Chawanji_Thesis.pdf"
-            >Read more</a
-          >
-        </li>
-      </ul>
+            >M.S.c thesis by Sharon Chawanji</a
+          >. This is a documentation on how to use the TJS api.
+        </p>
       </div>
+
+      <div id="table-joining-service">
+        <h1>OGC Table Joining Service</h1>
+        <p>
+          Table Joining Service is an OGC standard for joining a geospatial
+          framework with attribute data in tabular format.
+        </p>
       </div>
-{% endblock  %}
+
+      <div id="attribute-data">
+        <h1>Attribute data</h1>
+
+          <button class="btn btn-outline-primary"><a href="http://127.0.0.1:5000/static/covid_data.csv">GETDATA</a></button>
+
+
+      </div>
+
+      <div id="framework-data">
+        <h1>Framework data</h1>
+        <h1 id="vector-tiles">Vectortiles hosted on Geoserver</h1>
+
+        <ul class="content">
+          <li>
+            How to get an overview of all layers published in GeoWebCache <br />
+            <pre>http://localhost:8080/geoserver/gwc/service/tms/1.0.0?</pre>
+          </li>
+          <li>
+            Example HTTP request for viewing metadata about a specific layer<br />
+            <pre>
+http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson</pre
+            >
+          </li>
+        </ul>
+      </div>
+      <div id="tjs-requests">
+        <h1> TJS Operations</h1>
+        <p>This TJS prototype supports join data operation</p>
+        <strong>JoinData </strong>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
