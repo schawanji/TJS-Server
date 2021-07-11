@@ -10,10 +10,10 @@ COVID_DATA_CSV = 'https://raw.githubusercontent.com/nytimes/covid-19-data/6a6a67
                  '-states.csv'
 FrameworkURI = "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson/0/0/0.geojson"
 
-GetDataURL = "http://127.0.0.1:5000/static/covid_data.csv"
+GetDataURL = "https://schawanji.herokuapp.com/static/covid_data.csv"
 
 FrameworkKey = 'state'
-
+'http://127.0.0.1:5000/tjs/api/joindata?FrameworkURI=http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson/0/0/0.geojson&GetDataURL=https://schawanji.herokuapp.com/static/covid_data.csv&FrameworkKey=state'
 
 def get_framework_data(FrameworkURI):
     gdf = gpd.read_file(FrameworkURI)
@@ -25,7 +25,7 @@ def get_attribute_data(GetDataURL):
     return df
 
 
-#+print(get_attribute_data(GetDataURL))
+
 
 
 def get_framework_key(FrameworkKey, attribute1, attribute2):
@@ -56,17 +56,13 @@ def attribute_csv(GetDataURL):
     return df
 
 
-"""def joindata(FrameworkURI, GetDataURL, FrameworkKey):
+def joindata(FrameworkURI, GetDataURL, FrameworkKey):
     # Joining operation.
     gdf = get_framework_data(FrameworkURI)
     df = get_attribute_data(GetDataURL)
     frameworkKey = gdf['STATE_NAME']
     dataKey = str(FrameworkKey)
     df = df.rename(columns={dataKey: 'STATE_NAME'})
-    df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
-    filtered_df = df.query("date >= '2020-01-21' \
-                           and date < '2020-02-21'")
-    df = df.query("date == '2021-01-29'")
     df = df[['STATE_NAME', 'deaths', 'cases']]
     geometry = gdf[['geometry', 'STATE_NAME']]
     geometry = geometry.merge(df, on='STATE_NAME').reindex(gdf.index)
@@ -74,7 +70,7 @@ def attribute_csv(GetDataURL):
     return geojson
 
 
-print(joindata(FrameworkURI, GetDataURL, FrameworkKey))"""
+print(joindata(FrameworkURI, GetDataURL, FrameworkKey))
 
 
 @app.route('/')
@@ -89,8 +85,27 @@ def get_framework():
     geojson = gdf.to_json()
     return geojson
 
+@app.route('/tjs/api/joindata', methods=['GET'])
+def join_data():
+    # Input parameters required
+    FrameworkURI = request.args.get('FrameworkURI')
+    GetDataURL = request.args.get('GetDataURL')
+    FrameworkKey = request.args.get('FrameworkKey')
+    # Joining operation.
+    gdf = get_framework_data(FrameworkURI)
+    df = get_attribute_data(GetDataURL)
+    frameworkKey = gdf['STATE_NAME']
+    dataKey = str(FrameworkKey)
+    df = df.rename(columns={dataKey: 'STATE_NAME'})
+    df = df[['STATE_NAME', 'deaths', 'cases']]
+    geometry = gdf[['geometry', 'STATE_NAME']]
+    geometry = geometry.merge(df, on='STATE_NAME').reindex(gdf.index)
+    geojson = geometry.to_json()
+    return geojson
 
-@app.route('/tjs/api', methods=['GET'])
+
+
+""""@app.route('/tjs/api', methods=['GET'])
 def join_data():
     # Input parameters required
     FrameworkURI = request.args.get('FrameworkURI')
@@ -112,7 +127,7 @@ def join_data():
     attributes = adf[keys]
     geometry = geometry.merge(attributes, on='UN_A3').reindex(gdf.index)
     geojson = geometry.to_json()
-    return geojson
+    return geojson"""
 
 
 if __name__ == "__main__":
