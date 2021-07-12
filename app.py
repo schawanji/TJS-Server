@@ -13,7 +13,9 @@ FrameworkURI = "http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Asta
 GetDataURL = "https://schawanji.herokuapp.com/static/covid_data.csv"
 
 FrameworkKey = 'state'
-'http://127.0.0.1:5000/tjs/api/joindata?FrameworkURI=http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson/0/0/0.geojson&GetDataURL=https://schawanji.herokuapp.com/static/covid_data.csv&FrameworkKey=state'
+'http://127.0.0.1:5000/tjs/api/joindata?FrameworkURI=http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp' \
+'%3Astates@EPSG%3A4326@geojson/0/0/0.geojson&GetDataURL=https://schawanji.herokuapp.com/static/covid_data.csv' \
+'&FrameworkKey=state '
 
 def get_framework_data(FrameworkURI):
     gdf = gpd.read_file(FrameworkURI)
@@ -70,7 +72,7 @@ def joindata(FrameworkURI, GetDataURL, FrameworkKey):
     return geojson
 
 
-print(joindata(FrameworkURI, GetDataURL, FrameworkKey))
+
 
 
 @app.route('/')
