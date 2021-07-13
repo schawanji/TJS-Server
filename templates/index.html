@@ -46,13 +46,17 @@
       <div id="attribute-data">
         <h1>Attribute data</h1>
 
-         <a href="http://127.0.0.1:5000/static/covid_data.csv">USA Covid-19 data CSV file</a>
+         <a href="https://schawanji.herokuapp.com/static/covid_data.csv">USA Covid-19 data CSV file</a> <a href='https://raw.githubusercontent.com/nytimes/covid-19-data/6a6a67340325c354e9ee4890816718391b47d9ac/us-states.csv'>(Source)</a>
 
 
       </div>
 
       <div id="framework-data">
         <h1>Framework data</h1>
+
+        <h1> GeoJSON</h1>
+        <a href="https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json"> USA states json file</a>
+        <a href="https://openlayers.org/en/v4.6.5/examples/data/geojson/countries.geojson"> Countries Geojson file</a>
         <h1 id="vector-tiles">Vectortiles hosted on Geoserver</h1>
 
         <ul class="content">
@@ -72,6 +76,8 @@ http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@
         <h1> TJS Operations</h1>
         <p>This TJS prototype supports join data operation</p>
         <strong>JoinData </strong>
+        <pre>'http://127.0.0.1:5000/tjs/api/joindata?FrameworkURI=http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson/0/0/0.geojson&GetDataURL=https://schawanji.herokuapp.com/static/covid_data.csv&FrameworkKey=state '
+</pre>
       </div>
     </div>
   </div>
