@@ -17,6 +17,7 @@
 
         <li><a href="#tjs-requests">TJS Get Requests</a></li>
       </ul>
+      <button class="btn btn-outline-primary"><a href="https://vtc-tjs-demo.netlify.app/"> Launch Demo Map Application</a></button>
     </div>
     <div class="col-sm-9 main">
       <div id="introduction">
@@ -88,9 +89,23 @@ http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@
         <p>This TJS prototype supports join data operation</p>
         <strong>JoinData </strong>
         <pre>
-'http://127.0.0.1:5000/tjs/api/joindata?FrameworkURI=http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson/0/0/0.geojson&GetDataURL=https://schawanji.herokuapp.com/static/covid_data.csv&FrameworkKey=state'
-</pre
+        'http://127.0.0.1:5000/tjs/api/joindata?
+          FrameworkURI=http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson/0/0/0.geojson&
+          GetDataURL=https://schawanji.herokuapp.com/static/covid_data.csv&
+          FrameworkKey=state'
+        </pre
         >
+
+        <div class="input-group">
+  <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+    <option selected>Choose...</option>
+    <option value="1"> <a href="https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json"> US STATES JSON</a>  </option>
+    <option value="2"><a href="https://openlayers.org/en/v4.6.5/examples/data/geojson/countries.geojson"> Countries GeoJSON</a></option>
+
+  </select>
+  <button class="btn btn-outline-secondary" type="button">Button</button>
+</div>
+
       </div>
     </div>
   </div>
