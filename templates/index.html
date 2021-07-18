@@ -16,8 +16,14 @@
         </li>
 
         <li><a href="#tjs-requests">TJS Get Requests</a></li>
+        <li>
+          <button class="btn btn-outline-primary">
+            <a href="https://vtc-tjs-demo.netlify.app/">
+              Launch Demo Map Application</a
+            >
+          </button>
+        </li>
       </ul>
-      <button class="btn btn-outline-primary"><a href="https://vtc-tjs-demo.netlify.app/"> Launch Demo Map Application</a></button>
     </div>
     <div class="col-sm-9 main">
       <div id="introduction">
@@ -71,42 +77,99 @@
         >
         <h1 id="vector-tiles">Vectortiles hosted on Geoserver</h1>
 
-        <ul class="content">
-          <li>
+
+          <div>
             How to get an overview of all layers published in GeoWebCache <br />
-            <pre>http://localhost:8080/geoserver/gwc/service/tms/1.0.0?</pre>
-          </li>
-          <li>
+            <code>http://localhost:8080/geoserver/gwc/service/tms/1.0.0?</code>
+          </div>
+          <div>
             Example HTTP request for viewing metadata about a specific layer<br />
-            <pre>
-http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson</pre
+            <code>
+http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson</code
             >
-          </li>
-        </ul>
+          </div>
+
       </div>
       <div id="tjs-requests">
         <h1>TJS Operations</h1>
         <p>This TJS prototype supports join data operation</p>
-        <strong>JoinData </strong>
-        <pre>
-        'http://127.0.0.1:5000/tjs/api/joindata?
-          FrameworkURI=http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson/0/0/0.geojson&
-          GetDataURL=https://schawanji.herokuapp.com/static/covid_data.csv&
-          FrameworkKey=state'
-        </pre
+      <div><strong>JoinData </strong></div>
+        <code>
+          http://127.0.0.1:5000/tjs/api/joindata? FrameworkURI={Framework URL}&
+          GetDataURL={Attribute data URL}& FrameworkKey={state}
+        </code>
+<div><strong>Parameters</strong></div>
+
+        <div>
+          <span class="tab">FrameworkURL</span> This is the URL to the Framework
+          data example:
+        </div>
+        <code>
+          http://cartoroom/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson/{x}/{y}/{z}.geojson</code
         >
 
-        <div class="input-group">
-  <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-    <option selected>Choose...</option>
-    <option value="1"> <a href="https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json"> US STATES JSON</a>  </option>
-    <option value="2"><a href="https://openlayers.org/en/v4.6.5/examples/data/geojson/countries.geojson"> Countries GeoJSON</a></option>
+        <div>
+          <span class="tab">GetDataURL</span> This is the URL to the attribute
+          data example
+        </div>
+        <code>https://schawanji.herokuapp.com/static/covid_data.csv</code>
 
-  </select>
-  <button class="btn btn-outline-secondary" type="button">Button</button>
-</div>
-
+        <div>
+          <span class="tab">Framework Key</span> This is the name of the common
+          key(geographic identifier):
+        </div>
+        <code>State name</code>
       </div>
+      <strong>Example of a join data response</strong>
+      <div class="join-form">
+        <form action="">
+          <select id="framework">
+            <option value="">--Please Choose a Framework--</option>
+            <option value="1">
+              <a
+                href="https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json"
+              >
+                US STATES JSON</a
+              >
+            </option>
+            <option value="2">
+              <a
+                href="https://openlayers.org/en/v4.6.5/examples/data/geojson/countries.geojson"
+              >
+                Countries GeoJSON</a
+              >
+            </option>
+          </select>
+
+          <select id="framework-key">
+            <option value="">
+              --Please Choose column with Framework key--
+            </option>
+            <option value="1">state</option>
+          </select>
+
+          <input
+            type="url"
+            name="url"
+            id="url"
+            placeholder="Enter URL e.g (https://example.csv)"
+            pattern="https://.*"
+            size="30"
+            required
+          />
+          <select id="pet-select">
+            <option value="">
+              --Please Choose column with Framework key--
+            </option>
+            <option value="1">state</option>
+          </select>
+
+          <input type="submit" value="Join Data" />
+        </form>
+      </div>
+
+      <strong>Result</strong>
+      <div>GeoJSON file</div>
     </div>
   </div>
 </div>

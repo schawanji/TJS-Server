@@ -1,12 +1,16 @@
 body {
-  line-height: 24px;
+  line-height: 42px;
   margin: 30px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
-a{ text-decoration: none;
-color:black}
-a:hover{color:white}
+a {
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  color: white;
+}
 h1 {
   margin-bottom: 10px;
   font-size: 24px;
@@ -22,19 +26,45 @@ footer {
   padding: 10px 0;
   color: #222;
   line-height: 36px;
-  font-size:24px
+  font-size: 24px;
+  text-align: center;
+}
 
+pre {
+  font-family: monospace;
+  padding: 2pt 4pt;
+  border: 1px solid #d0d0d6;
+  border-radius: 2pt;
+  color: #48484a;
+  white-space: unset;
+  background-color: #ffffff;
+  font-size: 100%;
+}
 .main {
   max-width: 80%;
 }
 
 .sidenav {
-  width: 130px;
   position: fixed;
   z-index: 1;
   top: 20px;
-  left: 10px;
+  left: 50px;
   background: #eee;
   overflow-x: hidden;
-  padding: 8px 0;
+  padding: 15px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.join-form {
+  background: #eee;
+  padding: 5px 5px;
+  border-radius: 5px;
+  margin: 10px auto;
+}
+
+.tab {
+  background: #eee;
+  padding: 5px 5px;
+  border-radius: 5px;
 }
