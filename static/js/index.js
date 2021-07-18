@@ -1,13 +1,19 @@
-const form = document.querySelector("form");
+let form = document.querySelector("form");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const tjsapiUrl = document.querySelector("#tjs-api");
-  const frameworkDataUrl = document.querySelector("#framework-data");
-  const attributeDataUrl = document.querySelector("#attribute-data");
-  const frameworkKey = document.querySelector("#framework-key");
-  const joinData =
-    "tjsapiUrl.value + frameworkDataUrl.value + attributeDataUrl.value + frameworkKey.value";
-  console.log(frameworkDataUrl.value);
+  let tjsUrl = document.querySelector("#api").value;
+  let frameworkData = document.querySelector("#framework").value;
+  let attributeData = document.querySelector("#attribute").value;
+  let frameworkKey = document.querySelector("#key").value;
+  let results = document.querySelector("#results");
+
+  const joinData = `${tjsUrl}FrameworkURI=${frameworkData}&GetDataURL=${attributeData}&FrameworkKey=${frameworkKey}`;
+
+  results.innerHTML = `<button class="btn btn-secondary">
+  <a href="${joinData}" target="_blank">
+  Link to GeoJSON response
+  </a>
+  </button>`;
 });

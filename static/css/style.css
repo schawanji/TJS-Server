@@ -45,10 +45,7 @@ pre {
 }
 
 .sidenav {
-  position: fixed;
-  z-index: 1;
-  top: 20px;
-  left: 50px;
+  position: relative;
   background: #eee;
   overflow-x: hidden;
   padding: 15px 15px;

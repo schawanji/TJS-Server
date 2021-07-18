@@ -16,14 +16,15 @@
         </li>
 
         <li><a href="#tjs-requests">TJS Get Requests</a></li>
-        <li>
-          <button class="btn btn-outline-primary">
-            <a href="https://vtc-tjs-demo.netlify.app/">
-              Launch Demo Map Application</a
-            >
-          </button>
-        </li>
       </ul>
+
+      <div>
+        <button class="btn btn-secondary">
+          <a href="https://vtc-tjs-demo.netlify.app/">
+            Launch Demo Map Application</a
+          >
+        </button>
+      </div>
     </div>
     <div class="col-sm-9 main">
       <div id="introduction">
@@ -120,13 +121,13 @@
       </div>
       <strong>Example of a join data response</strong>
 
-      <form>
-        <div class="row">
+      <div class="join-form">
+        <form>
           <div class="input-group mb-3">
             <input
               type="url"
+              id="api"
               class="form-control"
-              id="tjs-api"
               placeholder="Enter URL e.g (https://example.tjs/api)"
               pattern="https://.*"
               size="30"
@@ -134,22 +135,25 @@
               value="https://schawanji.herokuapp.com/tjs/api/joindata?"
             />
           </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="url"
+              id="framework"
+              class="form-control"
+              placeholder="Enter URL e.g (https://example.geojson)"
+              pattern="https://.*"
+              required
+              size="100"
+              value="https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json"
+            />
+          </div>
+
           <div class="input-group mb-3">
             <input
               type="url"
               class="form-control"
-              id="framework-data"
-              placeholder="Enter URL e.g (https://example.geojson)"
-              pattern="https://.*"
-              required
-              value="https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json"
-            />
-          </div>
-          <div class="col-sm input-group mb-3">
-            <input
-              type="url"
-              class="form-control"
-              id="attribute-data"
+              id="attribute"
               placeholder="Enter URL e.g (https://example.csv)"
               pattern="https://.*"
               required
@@ -159,24 +163,27 @@
           <div class="input-group mb-3">
             <input
               type="text"
-              id="framework-key"
               class="form-control"
+              id="key"
               placeholder="Enter Framework Key"
               value="state"
             />
           </div>
-          <div class="input-group mb-3">
-            <input
-              type="submit"
-              class="btn btn-outline-danger"
-              value="Join Data"
-            />
+          <div>
+            <input type="submit" class="btn btn-secondary" value="Join Data" />
           </div>
-        </div>
-      </form>
+        </form>
 
-      <strong>Result</strong>
-      <div>GeoJSON file</div>
+        <strong>Result</strong>
+        <div id="results"></div>
+      </div>
+      <div>
+        <button class="btn btn-secondary">
+          <a href="https://vtc-tjs-demo.netlify.app/">
+            Launch Demo Map Application</a
+          >
+        </button>
+      </div>
     </div>
   </div>
 </div>
