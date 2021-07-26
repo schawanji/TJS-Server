@@ -3,8 +3,11 @@ from flask import Flask, render_template, request
 import requests
 import geopandas as gpd
 import pandas as pd
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
 
 CovidDataURL = 'https://raw.githubusercontent.com/nytimes/covid-19-data/6a6a67340325c354e9ee4890816718391b47d9ac/us' \
                '-states.csv '
