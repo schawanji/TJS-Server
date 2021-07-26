@@ -2,3 +2,4 @@ geopandas==0.7.0
 Flask==1.1.2
 gunicorn==19.5.0
 requests
+Flask-Cors==3.0.10
