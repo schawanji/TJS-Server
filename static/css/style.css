@@ -1,14 +1,18 @@
 body {
   line-height: 32px;
-  margin: 30px;
+  margin: 0 auto;
   font-size: 14px;
+  width: 95%;
+  max-width: 950px
 }
 
-a {
-  text-decoration: none;
-  color: black;
+a {text-decoration: none;
+  color: white;
+  font-weight: 700;
+  padding: 0.25em 0;
 }
 a:hover {
+  background: black;
   color: white;
 }
 h1 {
@@ -90,3 +94,7 @@ nav a:hover,
 nav a:focus {
   color: #1792d2;
 }
+
+.btn{background:gray;
+color:white;
+padding:5px 5px}
