@@ -1,12 +1,23 @@
 {% extends "base.html"%} {% block content %}
-<div class="nav-bar">
-  <nav>
-    <ul>
-      <li><a href=".">GET JoinData</a></li>
-      <li><a href="form.html">GET JoinData</a></li>
-    </ul>
-  </nav>
-</div>
+<header>
+  <div class="container container-flex">
+    <div class="site-title">
+      <h1>GeoJSON(VT) -Table Joining Service (TJS)</h1>
+    </div>
+  </div>
+  <div class="nav-bar">
+    <nav>
+      <ul>
+        <li><a href=".">GET JoinData</a></li>
+        <li>
+          <a href="{{url_for('templates',filename='form.html')}}"
+            >GET JoinData</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
 <div class="container">
   <div class="row">
     <div class="col-sm-3">
