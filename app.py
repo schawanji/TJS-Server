@@ -8,7 +8,6 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-
 def get_framework_data(FrameworkURI):
     gdf = gpd.read_file(FrameworkURI)
     gdf = gdf[['geometry', 'name']]
@@ -27,7 +26,7 @@ def get_framework_key(FrameworkKey, attribute1, attribute2):
     return [FrameworkKey, attribute_1, attribute_2]
 
 
-def joindata(FrameworkURI, GetDataURL, FrameworkKey):
+def getjoineddata(FrameworkURI, GetDataURL, FrameworkKey):
     # Joining operation.
     gdf = get_framework_data(FrameworkURI)
     df = get_attribute_data(GetDataURL)
@@ -57,9 +56,24 @@ def get_framework():
         geojson = gdf.to_json()
         return geojson
 
+@app.route('/tjs/api/getjoindata', methods=['GET'])
+def getjoindata():
+    # Input parameters required
+    FrameworkURI = request.args.get('FrameworkURI')
+    GetDataURL = request.args.get('GetDataURL')
+    FrameworkKey = request.args.get('FrameworkKey')
+    gdf = get_framework_data(FrameworkURI)
+    df = get_attribute_data(GetDataURL)
+    dataKey = str(FrameworkKey)
+    df = df.rename(columns={dataKey: 'name'})
+    df = df[['name', 'deaths', 'cases']]
+    geometry = gdf[['geometry', 'name']]
+    geometry = geometry.merge(df, on='name').reindex(gdf.index)
+    geojson = geometry.to_json()
+    return geojson
 
 @app.route('/tjs/api/joindata', methods=['GET'])
-def join_data():
+def tjsapi_joindata():
     # Input parameters required
     FrameworkURI = request.args.get('FrameworkURI')
     GetDataURL = request.args.get('GetDataURL')
