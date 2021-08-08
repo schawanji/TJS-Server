@@ -8,7 +8,7 @@ body {
 
 a {
   text-decoration: none;
-  color: white;
+  color: black;
   font-weight: 700;
   padding: 0.25em 0;
 }
@@ -42,12 +42,9 @@ pre {
   background-color: #ffffff;
   font-size: 100%;
 }
-.main {
-  max-width: 80%;
-}
+
 
 .sidenav {
-  position: relative;
   background: #eee;
   overflow-x: hidden;
   padding: 15px 15px;
