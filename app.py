@@ -70,6 +70,7 @@ def tjsapi_joindata():
     FrameworkURI = request.args.get('FrameworkURI')
     GetDataURL = request.args.get('GetDataURL')
     FrameworkKey = request.args.get('FrameworkKey')
+    AttributeKey = request.args.get('AttributeKey')
     # Joining operation.
     gdf = get_framework_data(FrameworkURI)
     df = get_attribute_data(GetDataURL)
