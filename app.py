@@ -1,10 +1,9 @@
 import flask
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import requests
 import geopandas as gpd
 import pandas as pd
 from flask_cors import CORS
-
 
 app = Flask(__name__)
 CORS(app)
@@ -15,18 +14,19 @@ CovidDataURL = 'https://raw.githubusercontent.com/nytimes/covid-19-data/6a6a6734
 
 GetDataURL = "https://schawanji.herokuapp.com/static/covid_data.csv"
 
-FrameworkKey = 'state'
+# FrameworkKey = 'state'
 
 FrameworkURI = 'https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json'
-
+FrameworkURINaturalEarth = "https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/10m/cultural/ne_10m_admin_0_countries.json"
 
 'https://schawanji.herokuapp.com/tjs/api/joindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji.herokuapp.com/static/covid_data.csv&FrameworkKey=state '
 
 
-
 def get_framework_data(FrameworkURI):
     gdf = gpd.read_file(FrameworkURI)
+    gdf = gdf[['geometry', 'SOVEREIGNT']]
     return gdf
+
 
 
 def get_attribute_data(GetDataURL):
@@ -73,18 +73,30 @@ def joindata(FrameworkURI, GetDataURL, FrameworkKey):
 
 
 
+
 @app.route('/')
 def index():
     title = "VectorTiles-Table Joining Service"
     return render_template("index.html", title=title)
 
 
-@app.route('/tjs/framework', methods=['GET'])
-def get_framework():
-    gdf = gpd.read_file(FrameworkURI)
-    geojson = gdf.to_json()
-    return geojson
+@app.route('/success/<key>/<path:frameworkUri>')
+def failed(key, frameworkUri):
+    return "GET FRAMEWORK failed, check if"+ "," + key+ ","+frameworkUri+","+"are correct."
 
+
+
+
+@app.route('/tjs/get_framework', methods=['POST', 'GET'])
+def get_framework():
+    if request.method == 'POST':
+        FrameworkKey = request.form['frameworkkey']
+        FrameworkURI = request.form['getframework']
+        r = requests.get(FrameworkURI)
+        gdf = gpd.read_file(r.text)
+        gdf = gdf[['geometry', FrameworkKey]]
+        geojson = gdf.to_json()
+        return geojson
 
 @app.route('/tjs/api/joindata', methods=['GET'])
 def join_data():

@@ -1,4 +1,4 @@
-let form = document.querySelector("form");
+let form = document.querySelector("#join-form");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();

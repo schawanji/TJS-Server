@@ -119,10 +119,52 @@
         </div>
         <code>State name</code>
       </div>
+
+      <div class="form">
+        <form
+          id="getframeworkform"
+          action="http://localhost:5000/tjs/get_framework"
+          method="post"
+        >
+          <p>Enter Name:</p>
+          <div class="input-group mb-3">
+            <input
+              type="url"
+              id="getframework"
+              name="getframework"
+              class="form-control"
+              placeholder="Enter URL e.g (https://example.geojson)"
+              pattern="https://.*"
+              required
+              size="100"
+              value="https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/10m/cultural/ne_10m_admin_0_countries.json"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              id="getframeworkkey"
+              name="frameworkkey"
+              required
+              value="SOVEREIGNT"
+              class="form-control"
+              placeholder="Enter Framework Key"
+            />
+          </div>
+          <div>
+            <input
+              type="submit"
+              class="btn btn-secondary"
+              value="GET FRAMEWORK DATA"
+            />
+          </div>
+        </form>
+      </div>
+
       <strong>Example of a join data response</strong>
 
-      <div class="join-form">
-        <form>
+      <div class="form">
+        <form id="join-form">
           <div class="input-group mb-3">
             <input
               type="url"
