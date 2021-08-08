@@ -25,20 +25,6 @@ def get_framework_key(FrameworkKey, attribute1, attribute2):
     attribute_2 = str(attribute2)
     return [FrameworkKey, attribute_1, attribute_2]
 
-
-def getjoineddata(FrameworkURI, GetDataURL, FrameworkKey):
-    # Joining operation.
-    gdf = get_framework_data(FrameworkURI)
-    df = get_attribute_data(GetDataURL)
-    dataKey = str(FrameworkKey)
-    df = df.rename(columns={dataKey: 'name'})
-    df = df[['name', 'deaths', 'cases']]
-    geometry = gdf[['geometry', 'name']]
-    geometry = geometry.merge(df, on='name').reindex(gdf.index)
-    geojson = geometry.to_json()
-    return geojson
-
-
 @app.route('/')
 def index():
     title = "VectorTiles-Table Joining Service"
@@ -54,6 +40,7 @@ def get_framework():
     if request.method == 'POST':
         FrameworkKey = request.form['frameworkkey']
         FrameworkURI = request.form['getframework']
+
         r = requests.get(FrameworkURI)
         gdf = gpd.read_file(r.text)
         gdf = gdf[['geometry', FrameworkKey]]
@@ -66,6 +53,7 @@ def getjoindata():
     FrameworkURI = request.args.get('FrameworkURI')
     GetDataURL = request.args.get('GetDataURL')
     FrameworkKey = request.args.get('FrameworkKey')
+    AttributeKey = request.args.get('AttributeKey')
     gdf = get_framework_data(FrameworkURI)
     df = get_attribute_data(GetDataURL)
     dataKey = str(FrameworkKey)
@@ -82,13 +70,13 @@ def tjsapi_joindata():
     FrameworkURI = request.args.get('FrameworkURI')
     GetDataURL = request.args.get('GetDataURL')
     FrameworkKey = request.args.get('FrameworkKey')
+    # Joining operation.
     gdf = get_framework_data(FrameworkURI)
     df = get_attribute_data(GetDataURL)
-    dataKey = str(FrameworkKey)
-    df = df.rename(columns={dataKey: 'name'})
-    df = df[['name', 'deaths', 'cases']]
-    geometry = gdf[['geometry', 'name']]
-    geometry = geometry.merge(df, on='name').reindex(gdf.index)
+    dataKey = AttributeKey
+    df = df.rename(columns={dataKey: FrameworkKey})
+    geometry = gdf[['geometry', FrameworkKey]]
+    geometry = geometry.merge(df, on=FrameworkKey).reindex(gdf.index)
     geojson = geometry.to_json()
     return geojson
 
