@@ -3,10 +3,11 @@ body {
   margin: 0 auto;
   font-size: 14px;
   width: 95%;
-  max-width: 950px
+  max-width: 950px;
 }
 
-a {text-decoration: none;
+a {
+  text-decoration: none;
   color: white;
   font-weight: 700;
   padding: 0.25em 0;
@@ -92,6 +93,8 @@ nav a:focus {
   color: #1792d2;
 }
 
-.btn{background:gray;
-color:white;
-padding:5px 5px}
+.btn {
+  background: gray;
+  color: white;
+  padding: 5px 5px;
+}
