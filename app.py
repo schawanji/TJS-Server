@@ -8,9 +8,10 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+
 def get_framework_data(FrameworkURI):
     gdf = gpd.read_file(FrameworkURI)
-    gdf = gdf[['geometry', 'SOVEREIGNT']]
+    gdf = gdf[['geometry', 'name']]
     return gdf
 
 
@@ -38,10 +39,12 @@ def joindata(FrameworkURI, GetDataURL, FrameworkKey):
     geojson = geometry.to_json()
     return geojson
 
+
 @app.route('/')
 def index():
     title = "VectorTiles-Table Joining Service"
     return render_template("index.html", title=title)
+
 
 @app.route('/tjs/get_framework', methods=['POST', 'GET'])
 def get_framework():
@@ -54,13 +57,13 @@ def get_framework():
         geojson = gdf.to_json()
         return geojson
 
+
 @app.route('/tjs/api/joindata', methods=['GET'])
 def join_data():
     # Input parameters required
     FrameworkURI = request.args.get('FrameworkURI')
     GetDataURL = request.args.get('GetDataURL')
     FrameworkKey = request.args.get('FrameworkKey')
-    # Joining operation.
     gdf = get_framework_data(FrameworkURI)
     df = get_attribute_data(GetDataURL)
     dataKey = str(FrameworkKey)
