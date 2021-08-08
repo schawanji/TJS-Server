@@ -44,6 +44,10 @@ def index():
     title = "VectorTiles-Table Joining Service"
     return render_template("index.html", title=title)
 
+@app.route('/form')
+def form():
+    title = "GET Framework"
+    return render_template("form.html", title=title)
 
 @app.route('/tjs/get_framework', methods=['POST', 'GET'])
 def get_framework():
