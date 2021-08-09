@@ -19,6 +19,25 @@
     <title>{% block title %} VTC TJS {% endblock %}</title>
   </head>
   <body>
+    <div class="container">
+      <header>
+        <div class="nav-bar">
+          <div class="site-title">
+            <h1>GeoJSON(VT) -Table Joining Service (TJS)</h1>
+          </div>
+        </div>
+        <div>
+          <nav>
+            <ul>
+              <li><a href="{{url_for('index')}}">HOME</a></li>
+              <li>
+                <a href="{{url_for('form')}}">GET JoinedData</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+    </div>
     {% block content %} {%endblock%}
 
     <footer>

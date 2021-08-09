@@ -1,92 +1,102 @@
 {% extends "base.html"%} {% block content %}
-<div class="container">
-  <header>
-  <div class="nav-bar">
-    <div class="site-title">
-      <h1>GeoJSON(VT) -Table Joining Service (TJS)</h1>
-    </div>
-  </div>
-  <div >
-    <nav>
-      <ul>
-        <li><a href="{{url_for('index')}}">HOME</a></li>
-        <li>
-          <a href="{{url_for('form')}}">GET JoinedData</a
-          >
-        </li>
-      </ul>
-    </nav>
-  </div>
-</header>
-  <div class="row">
-    <div class="col-sm-3">
-      <ul class="sidenav">
-        <li><a href="#introduction">Introduction</a></li>
-        <li><a href="#table-joining-service">Table Joning Service</a></li>
-        <li><a href="#attribute-data">Attribute data</a></li>
-        <li>
-          <a href="#framework-data">Framework data</a>
-          <ul>
-            <li><a href="#vector-tiles">Vectortiles</a></li>
-            <li><a href="#vector-tile-caches">Vectortile caches</a></li>
-            <li><a href="#GeoJSON">GeoJSON</a></li>
-          </ul>
-        </li>
 
-        <li><a href="#tjs-requests">TJS Get Requests</a></li>
-      </ul>
+<div class="container container-flex">
+  <aside class="sidenav">
+    <ul>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#table-joining-service">Table Joning Service</a></li>
+      <li><a href="#attribute-data">Attribute data</a></li>
+      <li>
+        <a href="#framework-data">Framework data</a>
+        <ul>
+          <li><a href="#vector-tiles">Vectortiles</a></li>
+          <li><a href="#vector-tile-caches">Vectortile caches</a></li>
+          <li><a href="#GeoJSON">GeoJSON</a></li>
+        </ul>
+      </li>
 
-      <div>
-        <button class="btn btn-secondary">
-          <a href="https://vtc-tjs-demo.netlify.app/">
-            Launch Demo Map Application</a
-          >
-        </button>
-      </div>
-    </div>
-    <div class="col-sm-9 main">
-
-      <div class="form">
-        <form
-
+      <li><a href="#tjs-requests">TJS Get Requests</a></li>
+      <li>
+        <a href="https://vtc-tjs-demo.netlify.app/">
+          Launch Demo Map Application</a
         >
-          <p>Enter Name:</p>
-          <div class="input-group mb-3">
-            <input
-              type="url"
-              id="getframework"
-              name="getframework"
-              class="form-control"
-              placeholder="Enter URL e.g (https://example.geojson)"
-              pattern="https://.*"
-              required
-              size="100"
-              value="https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/10m/cultural/ne_10m_admin_0_countries.json"
-            />
-          </div>
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              id="getframeworkkey"
-              name="frameworkkey"
-              required
-              value="SOVEREIGNT"
-              class="form-control"
-              placeholder="Enter Framework Key"
-            />
-          </div>
-          <div>
-            <input
-              type="submit"
-              class="btn btn-secondary"
-              value="GET FRAMEWORK DATA"
-            />
-          </div>
-        </form>
-      </div>
+      </li>
+    </ul>
+  </aside>
 
+  <main class="col-sm-9 main">
+    Join Data Response
+    <h3>Example of a join data response</h3>
 
+    <div class="form">
+      <form id="join-form">
+        <div class="input-group mb-3">
+          <input
+            type="url"
+            id="apiurl"
+            name="apiurl"
+            class="form-control"
+            placeholder="Enter URL e.g (https://example.tjs/api)"
+            pattern="https://.*"
+            size="30"
+            required
+            value="https://schawanji.herokuapp.com/tjs/api/joindata?"
+          />
+        </div>
+
+        <div class="input-group mb-3">
+          <input
+            type="url"
+            id="frameworkurl"
+            name="frameworkurl"
+            class="form-control"
+            placeholder="Enter URL e.g (https://example.geojson)"
+            pattern="https://.*"
+            required
+            size="100"
+            value="https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json"
+          />
+        </div>
+
+        <div class="input-group mb-3">
+          <input
+            type="url"
+            class="form-control"
+            id="attributeurl"
+            name="attributeurl"
+            placeholder="Enter URL e.g (https://example.csv)"
+            pattern="https://.*"
+            required
+            value="https://schawanji.herokuapp.com/static/covid_data.csv"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="frameworkkey"
+            name="frameworkkey"
+            placeholder="Enter Framework Key"
+            value="name"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="attributekey"
+            name="attributekey"
+            placeholder="Enter Attribute Key"
+            value="state"
+          />
+        </div>
+        <div class="submit-button">
+          <input type="submit" class="btn" value="Generate Joined Data URL" />
+        </div>
+      </form>
+      <div id="results"></div>
     </div>
-  </div>
+  </main>
 </div>
+
 {% endblock %}

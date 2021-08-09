@@ -8,6 +8,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+
 def get_framework_data(FrameworkURI):
     gdf = gpd.read_file(FrameworkURI)
     gdf = gdf[['geometry', 'name']]
@@ -25,27 +26,34 @@ def get_framework_key(FrameworkKey, attribute1, attribute2):
     attribute_2 = str(attribute2)
     return [FrameworkKey, attribute_1, attribute_2]
 
+GetDataURL = "https://schawanji.herokuapp.com/static/covid_data.csv"
+FrameworkKey = 'name'
+AttributeKey = 'state'
+FrameworkURI = 'https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json'
+
 @app.route('/')
 def index():
     title = "VectorTiles-Table Joining Service"
     return render_template("index.html", title=title)
+
 
 @app.route('/form')
 def form():
     title = "GET Framework"
     return render_template("form.html", title=title)
 
+
 @app.route('/tjs/get_framework', methods=['POST', 'GET'])
 def get_framework():
     if request.method == 'POST':
         FrameworkKey = request.form['frameworkkey']
         FrameworkURI = request.form['getframework']
-
         r = requests.get(FrameworkURI)
         gdf = gpd.read_file(r.text)
         gdf = gdf[['geometry', FrameworkKey]]
         geojson = gdf.to_json()
         return geojson
+
 
 @app.route('/tjs/api/getjoindata', methods=['GET'])
 def getjoindata():
@@ -63,6 +71,7 @@ def getjoindata():
     geometry = geometry.merge(df, on='name').reindex(gdf.index)
     geojson = geometry.to_json()
     return geojson
+
 
 @app.route('/tjs/api/joindata', methods=['GET'])
 def tjsapi_joindata():

@@ -1,249 +1,159 @@
 {% extends "base.html"%} {% block content %}
-<div class="container">
-  <header>
-  <div class="nav-bar">
-    <div class="site-title">
-      <h1>GeoJSON(VT) -Table Joining Service (TJS)</h1>
-    </div>
-  </div>
-  <div >
-    <nav>
-      <ul>
-        <li><a href="{{url_for('index')}}">HOME</a></li>
-        <li>
-          <a href="{{url_for('form')}}">GET JoinedData</a
-          >
-        </li>
-      </ul>
-    </nav>
-  </div>
-</header>
-  <div class="row">
-    <div class="col-sm-3">
-      <ul class="sidenav">
-        <li><a href="#introduction">Introduction</a></li>
-        <li><a href="#table-joining-service">Table Joning Service</a></li>
-        <li><a href="#attribute-data">Attribute data</a></li>
-        <li>
-          <a href="#framework-data">Framework data</a>
-          <ul>
-            <li><a href="#vector-tiles">Vectortiles</a></li>
-            <li><a href="#vector-tile-caches">Vectortile caches</a></li>
-          </ul>
-        </li>
 
-        <li><a href="#tjs-requests">TJS Get Requests</a></li>
-      </ul>
+<div class="container container-flex">
+  <aside class="sidenav">
+    <ul>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#table-joining-service">Table Joning Service</a></li>
+      <li><a href="#attribute-data">Attribute data</a></li>
+      <li>
+        <a href="#framework-data">Framework data</a>
+        <ul>
+          <li><a href="#vector-tiles">Vectortiles</a></li>
+          <li><a href="#vector-tile-caches">Vectortile caches</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#tjs-requests">TJS Get Requests</a></li>
+      <li>
+        <a href="https://vtc-tjs-demo.netlify.app/">
+          Launch Demo Map Application</a
+        >
+      </li>
+    </ul>
+  </aside>
+
+  <main>
+    <div id="introduction">
+      <h2>Introduction</h2>
+
+      <p>
+        This is a TJS implementaion prototype that supports join data operation.
+        It was built to examine the potential of using vectortile caches as
+        framework data for an TJS API based on OGC standards. This work is based
+        on a
+        <a
+          href="https://cartographymaster.eu/wp-content/theses/2020_Chawanji_Thesis.pdf"
+          >M.S.c thesis by Sharon Chawanji</a
+        >. This is a documentation on how to use the TJS api.
+      </p>
+    </div>
+
+    <div id="table-joining-service">
+      <h2>OGC Table Joining Service</h2>
+      <p>
+        Table Joining Service is an OGC standard for joining a geospatial
+        framework with attribute data in tabular format.
+      </p>
+    </div>
+
+    <div id="attribute-data">
+      <h2>Attribute data</h2>
+
+      <a href="https://schawanji.herokuapp.com/static/covid_data.csv"
+        >USA Covid-19 data CSV file</a
+      >
+      <a
+        href="https://raw.githubusercontent.com/nytimes/covid-19-data/6a6a67340325c354e9ee4890816718391b47d9ac/us-states.csv"
+        >(Source)</a
+      >
+    </div>
+
+    <div id="framework-data">
+      <h2>Framework data</h2>
+
+      <h2>GeoJSON</h2>
+      <a
+        href="https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json"
+      >
+        USA states json file</a
+      >
+      <a
+        href="https://openlayers.org/en/v4.6.5/examples/data/geojson/countries.geojson"
+      >
+        Countries Geojson file</a
+      >
+      <h2 id="vector-tiles">Vectortiles hosted on Geoserver</h2>
 
       <div>
-        <button class="btn btn-secondary">
-          <a href="https://vtc-tjs-demo.netlify.app/">
-            Launch Demo Map Application</a
-          >
-        </button>
-      </div>
-    </div>
-    <div class="col-sm-9 main">
-      <div id="introduction">
-        <h1>Table Joining Service (TJS) for vectortiles spatial framework</h1>
-
-        <p>
-          This is a TJS implementaion prototype that supports join data
-          operation. It was built to examine the potential of using vectortile
-          caches as framework data for an TJS API based on OGC standards. This
-          work is based on a
-          <a
-            href="https://cartographymaster.eu/wp-content/theses/2020_Chawanji_Thesis.pdf"
-            >M.S.c thesis by Sharon Chawanji</a
-          >. This is a documentation on how to use the TJS api.
-        </p>
-      </div>
-
-      <div id="table-joining-service">
-        <h1>OGC Table Joining Service</h1>
-        <p>
-          Table Joining Service is an OGC standard for joining a geospatial
-          framework with attribute data in tabular format.
-        </p>
-      </div>
-
-      <div id="attribute-data">
-        <h1>Attribute data</h1>
-
-        <a href="https://schawanji.herokuapp.com/static/covid_data.csv"
-          >USA Covid-19 data CSV file</a
-        >
-        <a
-          href="https://raw.githubusercontent.com/nytimes/covid-19-data/6a6a67340325c354e9ee4890816718391b47d9ac/us-states.csv"
-          >(Source)</a
-        >
-      </div>
-
-      <div id="framework-data">
-        <h1>Framework data</h1>
-
-        <h1>GeoJSON</h1>
-        <a
-          href="https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json"
-        >
-          USA states json file</a
-        >
-        <a
-          href="https://openlayers.org/en/v4.6.5/examples/data/geojson/countries.geojson"
-        >
-          Countries Geojson file</a
-        >
-        <h1 id="vector-tiles">Vectortiles hosted on Geoserver</h1>
-
-        <div>
-          How to get an overview of all layers published in GeoWebCache <br />
-          <code>http://localhost:8080/geoserver/gwc/service/tms/1.0.0?</code>
-        </div>
-        <div>
-          Example HTTP request for viewing metadata about a specific layer<br />
-          <code>
-            http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson</code
-          >
-        </div>
-      </div>
-      <div id="tjs-requests">
-        <h1>TJS Operations</h1>
-        <p>This TJS prototype supports join data operation</p>
-        <div><strong>JoinData </strong></div>
-        <code>
-          http://127.0.0.1:5000/tjs/api/joindata? FrameworkURI={Framework URL}&
-          GetDataURL={Attribute data URL}& FrameworkKey={state}
-        </code>
-        <div><strong>Parameters</strong></div>
-
-        <div>
-          <span class="tab">FrameworkURL</span> This is the URL to the Framework
-          data example:
-        </div>
-        <code>
-          http://cartoroom/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson/{x}/{y}/{z}.geojson</code
-        >
-
-        <div>
-          <span class="tab">GetDataURL</span> This is the URL to the attribute
-          data example
-        </div>
-        <code>https://schawanji.herokuapp.com/static/covid_data.csv</code>
-
-        <div>
-          <span class="tab">Framework Key</span> This is the name of the common
-          key(geographic identifier):
-        </div>
-        <code>State name</code>
-      </div>
-
-      <div class="form">
-        <form
-          id="getframeworkform"
-          action="https://schawanji.herokuapp.com/tjs/get_framework"
-          method="post"
-        >
-          <p>Enter Name:</p>
-          <div class="input-group mb-3">
-            <input
-              type="url"
-              id="getframework"
-              name="getframework"
-              class="form-control"
-              placeholder="Enter URL e.g (https://example.geojson)"
-              pattern="https://.*"
-              required
-              size="100"
-              value="https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/10m/cultural/ne_10m_admin_0_countries.json"
-            />
-          </div>
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              id="getframeworkkey"
-              name="frameworkkey"
-              required
-              value="SOVEREIGNT"
-              class="form-control"
-              placeholder="Enter Framework Key"
-            />
-          </div>
-          <div>
-            <input
-              type="submit"
-              class="btn btn-secondary"
-              value="GET FRAMEWORK DATA"
-            />
-          </div>
-        </form>
-      </div>
-
-      <strong>Example of a join data response</strong>
-
-      <div class="form">
-        <form id="join-form">
-          <div class="input-group mb-3">
-            <input
-              type="url"
-              id="api"
-              class="form-control"
-              placeholder="Enter URL e.g (https://example.tjs/api)"
-              pattern="https://.*"
-              size="30"
-              required
-              value="https://schawanji.herokuapp.com/tjs/api/joindata?"
-            />
-          </div>
-
-          <div class="input-group mb-3">
-            <input
-              type="url"
-              id="framework"
-              class="form-control"
-              placeholder="Enter URL e.g (https://example.geojson)"
-              pattern="https://.*"
-              required
-              size="100"
-              value="https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json"
-            />
-          </div>
-
-          <div class="input-group mb-3">
-            <input
-              type="url"
-              class="form-control"
-              id="attribute"
-              placeholder="Enter URL e.g (https://example.csv)"
-              pattern="https://.*"
-              required
-              value="https://schawanji.herokuapp.com/static/covid_data.csv"
-            />
-          </div>
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              class="form-control"
-              id="key"
-              placeholder="Enter Framework Key"
-              value="state"
-            />
-          </div>
-          <div>
-            <input type="submit" class="btn btn-secondary" value="Join Data" />
-          </div>
-        </form>
-
-        <strong>Result</strong>
-        <div id="results"></div>
+        How to get an overview of all layers published in GeoWebCache <br />
+        <code>http://localhost:8080/geoserver/gwc/service/tms/1.0.0?</code>
       </div>
       <div>
-        <button class="btn btn-secondary">
-          <a href="https://vtc-tjs-demo.netlify.app/">
-            Launch Demo Map Application</a
-          >
-        </button>
+        Example HTTP request for viewing metadata about a specific layer<br />
+        <code>
+          http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson</code
+        >
       </div>
     </div>
-  </div>
+    <div id="tjs-requests">
+      <h2>TJS Operations</h2>
+      <p>This TJS prototype supports join data operation</p>
+      <div><strong>JoinData </strong></div>
+      <code>
+        http://127.0.0.1:5000/tjs/api/joindata? FrameworkURI={Framework URL}&
+        GetDataURL={Attribute data URL}& FrameworkKey={state}
+      </code>
+      <div><strong>Parameters</strong></div>
+
+      <div>
+        <span class="tab">FrameworkURL</span> This is the URL to the Framework
+        data example:
+      </div>
+      <code>
+        http://cartoroom/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson/{x}/{y}/{z}.geojson</code
+      >
+
+      <div>
+        <span class="tab">GetDataURL</span> This is the URL to the attribute
+        data example
+      </div>
+      <code>https://schawanji.herokuapp.com/static/covid_data.csv</code>
+
+      <div>
+        <span class="tab">Framework Key</span> This is the name of the common
+        key(geographic identifier):
+      </div>
+      <code>State name</code>
+    </div>
+
+    <div class="form">
+      <form
+        id="getframeworkform"
+        action="https://schawanji.herokuapp.com/tjs/get_framework"
+        method="post"
+      >
+        <p>Enter Name:</p>
+        <div>
+          <input
+            type="url"
+            id="getframework"
+            name="getframework"
+            class="form-control"
+            placeholder="Enter URL e.g (https://example.geojson)"
+            pattern="https://.*"
+            required
+            size="100"
+            value="https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/10m/cultural/ne_10m_admin_0_countries.json"
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            id="getframeworkkey"
+            name="frameworkkey"
+            required
+            value="SOVEREIGNT"
+            class="form-control"
+            placeholder="Enter Framework Key"
+          />
+        </div>
+        <div class="submit-button">
+          <input type="submit" class="btn" value="GET FRAMEWORK DATA" />
+        </div>
+      </form>
+    </div>
+  </main>
 </div>
+
 {% endblock %}
