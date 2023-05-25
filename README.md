@@ -1,6 +1,6 @@
-# TJS-Server
+## TJS-Server: Table Joining Service for Vector Tiles Spatial Framework
 
-Table Joining Service (TJS) for vector tiles spatial framework
+The TJS-Server prototype was developed to explore the potential of utilizing vectortile caches as framework data for a TJS API based on OGC standards. This project builds upon the MSC thesis by Sharon Chawanji, which can be found [here](https://cartographymaster.eu/wp-content/theses/2020_Chawanji_Thesis.pdf).
 
-TJS-Server prototype was built to examine the potential of using vectortile caches as framework data for an TJS API based on OGC standards. This work is based on a <a href="https://cartographymaster.eu/wp-content/theses/2020_Chawanji_Thesis.pdf">MSC thesis by Sharon Chawanji</a>. The documentation on how to use the api is currently being developed on <a href='https://schawanji.herokuapp.com/'> Here is a link to a demo page <a>
+We are currently in the process of developing comprehensive documentation on how to use the API. You can visit the demo page [here](https://schawanji.herokuapp.com/) for a preview of the functionality.
 
