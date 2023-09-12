@@ -50,7 +50,7 @@
     <div id="attribute-data">
       <h2>Attribute data</h2>
 
-      <a href="https://schawanji.herokuapp.com/static/covid_data.csv"
+      <a href="http://127.0.0.1:5000/static/covid_data.csv"
         >USA Covid-19 data CSV file</a
       >
       <a
@@ -77,12 +77,12 @@
 
       <div>
         How to get an overview of all layers published in GeoWebCache <br />
-        <code>http://localhost:8080/geoserver/gwc/service/tms/1.0.0?</code>
+        <pre>http://localhost:8080/geoserver/gwc/service/tms/1.0.0?</pre>
       </div>
       <div>
         Example HTTP request for viewing metadata about a specific layer<br />
-        <code>
-          http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson</code
+        <pre>
+          http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson</pre
         >
       </div>
     </div>
@@ -90,37 +90,37 @@
       <h2>TJS Operations</h2>
       <p>This TJS prototype supports join data operation</p>
       <div><strong>JoinData </strong></div>
-      <code>
+      <pre>
         http://127.0.0.1:5000/tjs/api/joindata? FrameworkURI={Framework URL}&
         GetDataURL={Attribute data URL}& FrameworkKey={state}
-      </code>
+      </pre>
       <div><strong>Parameters</strong></div>
 
       <div>
         <span class="tab">FrameworkURL</span> This is the URL to the Framework
         data example:
       </div>
-      <code>
-        http://cartoroom/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson/{x}/{y}/{z}.geojson</code
+      <pre>
+        http://cartoroom/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson/{x}/{y}/{z}.geojson</pre
       >
 
       <div>
         <span class="tab">GetDataURL</span> This is the URL to the attribute
         data example
       </div>
-      <code>https://schawanji.herokuapp.com/static/covid_data.csv</code>
+      <pre>http://127.0.0.1:5000/static/covid_data.csv</pre>
 
       <div>
         <span class="tab">Framework Key</span> This is the name of the common
         key(geographic identifier):
       </div>
-      <code>State name</code>
+      <pre>State name</pre>
     </div>
 
     <div class="form">
       <form
         id="getframeworkform"
-        action="https://schawanji.herokuapp.com/tjs/get_framework"
+        action="http://127.0.0.1:5000/tjs/get_framework"
         method="post"
       >
         <p>Enter Name:</p>

@@ -1,43 +1,78 @@
+/* Reset some default styles */
+body, ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Global styles */
 body {
   margin: 0 auto;
-  line-height: 2rem;
-  font-size: 1rem;
+  line-height: 1.6;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
 }
 
 .container {
-  width: 80%;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px;
 }
-.container-flex {
-  display: flex;
-  margin: 0 auto;
-}
-main {
-  width: 60%;
-  max-width: 600pxpx;
-}
-aside {
-  width: 35%;
-  max-width: 350px;
-  margin-right: 1em;
-}
+
+/* Header styles */
 
 header {
+  background-color: #333; 
+  color: #fff; 
+  padding: 10px 0; 
   text-align: center;
-  background: #f8f8f8;
-  padding: 2em 0;
-  margin-bottom: 1rem;
 }
 
+/* Style the site title */
+.site-title h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 24px; 
+}
+
+/* Style the navigation menu */
 nav ul {
   list-style: none;
   padding: 0;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li:last-child {
+  margin-right: 0; 
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff; 
+  font-weight: bold; 
+  transition: color 0.3s; 
+}
+
+nav ul li a:hover {
+  color: #ff4500; 
+}
+
+nav {
+  text-align: center;
+}
+
+nav ul {
   display: flex;
   justify-content: center;
+  padding: 0;
 }
 
 nav li {
-  margin-left: 2em;
+  margin-left: 20px;
 }
 
 nav a {
@@ -45,6 +80,7 @@ nav a {
   color: #707070;
   font-weight: 700;
   padding: 0.25em 0;
+  transition: color 0.3s ease;
 }
 
 nav a:hover,
@@ -52,60 +88,130 @@ nav a:focus {
   color: #1792d2;
 }
 
-li {
-  list-style: none;
+/* Main and Sidebar styles */
+.container-flex {
+  display: flex;
+  margin: 0 auto;
 }
-a {
-  text-decoration: none;
+
+main {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
 }
+
+aside {
+  flex-basis: 30%;
+  max-width: 350px;
+  margin-right: 20px;
+  background-color: #fff;
+}
+
+/* Footer styles */
 
 footer {
-  background: #f8f8f8;
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
   text-align: center;
-  margin: 1em auto;
-  padding: 3em 0;
 }
 
-/*Typography*/
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
 
-a {
+.footer-content p {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin: 10px 0;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.footer-links svg {
+  margin-left: 10px;
+}
+
+/* Add hover effect to links */
+.footer-links a:hover {
   color: #1792d2;
 }
+
+/* Copyright text */
+.footer-content p:last-child {
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+
+/* Typography */
+a {
+  color: #1792d2;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
 a:hover,
-.a:focus {
+a:focus {
   color: #143774;
 }
 
-code {
-  font-weight: 400;
-  padding: 1em 1em;
+pre {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: pre-wrap; /* Preserve line breaks */
 }
 
-/*Forms*/
-
+/* Forms */
 form {
-  padding: 2em 2em;
+  padding: 20px;
   background: #f8f8f8;
   margin: 0 auto;
+  max-width: 400px;
 }
+
 input {
-  padding: 0.5em;
-  margin-bottom: 1em;
+  padding: 10px;
+  margin-bottom: 15px;
   border-radius: 5px;
   border: 1px solid gray;
   width: 100%;
-  text-align: center;
-  font-size: 0.9rem;
+  font-size: 16px;
 }
 
 .btn {
-  text-align: center;
+  display: inline-block;
+  padding: 10px 20px;
   background-color: gray;
   color: #f8f8f8;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
 .btn:hover {
   opacity: 0.8;
 }
 
-strong{text-align:center}
+strong {
+  text-align: center;
+}

@@ -1,31 +1,7 @@
 {% extends "base.html"%} {% block content %}
 
-<div class="container container-flex">
-  <aside class="sidenav">
-    <ul>
-      <li><a href="#introduction">Introduction</a></li>
-      <li><a href="#table-joining-service">Table Joning Service</a></li>
-      <li><a href="#attribute-data">Attribute data</a></li>
-      <li>
-        <a href="#framework-data">Framework data</a>
-        <ul>
-          <li><a href="#vector-tiles">Vectortiles</a></li>
-          <li><a href="#vector-tile-caches">Vectortile caches</a></li>
-          <li><a href="#GeoJSON">GeoJSON</a></li>
-        </ul>
-      </li>
-
-      <li><a href="#tjs-requests">TJS Get Requests</a></li>
-      <li>
-        <a href="https://vtc-tjs-demo.netlify.app/">
-          Launch Demo Map Application</a
-        >
-      </li>
-    </ul>
-  </aside>
-
-  <main class="col-sm-9 main">
-    Join Data Response
+  <main >
+    <h2>Join Data Response</h2> 
     <h3>Example of a join data response</h3>
 
     <div class="form">
@@ -37,10 +13,9 @@
             name="apiurl"
             class="form-control"
             placeholder="Enter URL e.g (https://example.tjs/api)"
-            pattern="https://.*"
             size="30"
             required
-            value="https://schawanji.herokuapp.com/tjs/api/joindata?"
+            value="http://127.0.0.1:5000/tjs/api/joindata?"
           />
         </div>
 
@@ -51,7 +26,6 @@
             name="frameworkurl"
             class="form-control"
             placeholder="Enter URL e.g (https://example.geojson)"
-            pattern="https://.*"
             required
             size="100"
             value="https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json"
@@ -65,9 +39,8 @@
             id="attributeurl"
             name="attributeurl"
             placeholder="Enter URL e.g (https://example.csv)"
-            pattern="https://.*"
             required
-            value="https://schawanji.herokuapp.com/static/covid_data.csv"
+            value="http://127.0.0.1:5000/static/covid_data.csv"
           />
         </div>
         <div class="input-group mb-3">
