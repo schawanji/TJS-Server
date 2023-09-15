@@ -26,7 +26,7 @@ def get_framework_key(FrameworkKey, attribute1, attribute2):
     attribute_2 = str(attribute2)
     return [FrameworkKey, attribute_1, attribute_2]
 
-GetDataURL = "https://schawanji.herokuapp.com/static/covid_data.csv"
+GetDataURL = "https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv"
 FrameworkKey = 'name'
 AttributeKey = 'state'
 FrameworkURI = 'https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json'
@@ -49,10 +49,15 @@ def get_framework():
         FrameworkKey = request.form['frameworkkey']
         FrameworkURI = request.form['getframework']
         r = requests.get(FrameworkURI)
+        print(r)
         gdf = gpd.read_file(r.text)
         gdf = gdf[['geometry', FrameworkKey]]
         geojson = gdf.to_json()
         return geojson
+    else:
+        return "This endpoint only accepts POST requests."
+
+#curl -X POST -d "frameworkkey=SOVEREIGNT&getframework=https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/10m/cultural/ne_10m_admin_0_countries.json" http://127.0.0.1:8000/tjs/get_framework
 
 
 @app.route('/tjs/api/getjoindata', methods=['GET'])
@@ -89,8 +94,9 @@ def tjsapi_joindata():
     geometry = geometry.merge(df, on=FrameworkKey).reindex(gdf.index)
     geojson = geometry.to_json()
     return geojson
+#http://127.0.0.1:8000/tjs/api/joindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
 
 
 if __name__ == "__main__":
     #app.run(host='0.0.0.0', port=5000)
-    app.run()
+    app.run(debug=True)
