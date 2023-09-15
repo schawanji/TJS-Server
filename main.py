@@ -58,6 +58,8 @@ def get_framework():
         return "This endpoint only accepts POST requests."
 
 #curl -X POST -d "frameworkkey=SOVEREIGNT&getframework=https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/10m/cultural/ne_10m_admin_0_countries.json" http://127.0.0.1:8000/tjs/get_framework
+#curl -X POST -d "frameworkkey=SOVEREIGNT&getframework=https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/10m/cultural/ne_10m_admin_0_countries.json" https://schawanji-tjs-server-demo.up.railway.app/tjs/get_framework
+
 
 
 @app.route('/tjs/api/getjoindata', methods=['GET'])

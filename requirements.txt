@@ -25,3 +25,5 @@ six
 tzdata
 urllib3
 Werkzeug
+pyogrio
+fiona
