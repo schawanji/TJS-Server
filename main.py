@@ -95,7 +95,8 @@ def tjsapi_joindata():
     geometry = gdf[['geometry', FrameworkKey]]
     geometry = geometry.merge(df, on=FrameworkKey).reindex(gdf.index)
     geojson = geometry.to_json()
-    return geojson
+    #return geojson
+    return gdf
 #http://127.0.0.1:8000/tjs/api/joindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
 
 
