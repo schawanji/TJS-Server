@@ -130,25 +130,32 @@ def join_data():
     return jsonify(geojson)
 #http://127.0.0.1:8000/join_data?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=http://127.0.0.1:8000/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
 #https://schawanji-tjs-server-demo.up.railway.app/join_data?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
-
+#http://127.0.0.1:8000/get_geojson?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json
 ###################
+
 
 @app.route('/get_geojson', methods=['GET'])
 def get_geojson():
     try:
-        # Fetch the GeoJSON data from the URL
-        FrameworkURI = requests.get('FrameworkURI')
+        # Get the 'url' parameter from the request's query string
+        FrameworkURI = request.args.get('FrameworkURI')
         
-        # Check if the request was successful (status code 200)
-        if FrameworkURI.status_code == 200:
-            # Set the content type to GeoJSON
-            FrameworkURI.headers['Content-Type'] = 'application/json'
-            # Return the GeoJSON data as a FrameworkURI
-            return FrameworkURI.text
+        if  FrameworkURI:
+            # Fetch the GeoJSON data from the specified URL
+            response = requests.get( FrameworkURI)
+            
+            # Check if the request was successful (status code 200)
+            if response.status_code == 200:
+                # Set the content type to GeoJSON
+                response.headers['Content-Type'] = 'application/json'
+                # Return the GeoJSON data as a response
+                return response.text
+            else:
+                return jsonify({"error": "Failed to fetch GeoJSON data"}), 500
         else:
-            return jsonify({"error": "Failed to fetch GeoJSON data"}), 500
+            return jsonify({"error": "URL parameter 'url' is missing"}), 400
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e)}), 50
 
 
 if __name__ == "__main__":
