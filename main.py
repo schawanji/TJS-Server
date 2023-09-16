@@ -1,9 +1,10 @@
 import flask
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for,jsonify
 import requests
 import geopandas as gpd
 import pandas as pd
 from flask_cors import CORS
+
 
 app = Flask(__name__)
 CORS(app)
@@ -26,10 +27,25 @@ def get_framework_key(FrameworkKey, attribute1, attribute2):
     attribute_2 = str(attribute2)
     return [FrameworkKey, attribute_1, attribute_2]
 
+
+
 GetDataURL = "https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv"
 FrameworkKey = 'name'
 AttributeKey = 'state'
 FrameworkURI = 'https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json'
+
+
+# Joining operation.
+gdf = get_framework_data(FrameworkURI)
+df = get_attribute_data(GetDataURL)
+dataKey = AttributeKey
+df = df.rename(columns={dataKey: FrameworkKey})
+geometry = gdf[['geometry', FrameworkKey]]
+geometry = geometry.merge(df, on=FrameworkKey).reindex(gdf.index)
+geojson = geometry.to_json()
+print(geojson)
+
+###############################
 
 @app.route('/')
 def index():
@@ -95,10 +111,37 @@ def tjsapi_joindata():
     geometry = gdf[['geometry', FrameworkKey]]
     geometry = geometry.merge(df, on=FrameworkKey).reindex(gdf.index)
     geojson = geometry.to_json()
-    #return geojson
-    return 'gdf'
+    return geojson
+    
 #http://127.0.0.1:8000/tjs/api/joindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
+#http://127.0.0.1:8000/tjs/api/getjoindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name
+@app.route('/join_data', methods=['GET'])
+def join_data():
+    # Get query parameters from the request
+    FrameworkURI = request.args.get('FrameworkURI')
+    GetDataURL = request.args.get('GetDataURL')
+    FrameworkKey = request.args.get('FrameworkKey')
+    AttributeKey = request.args.get('AttributeKey')
 
+    # Replace this code with your actual data retrieval and joining logic
+    gdf = get_framework_data(FrameworkURI)  # Replace with your data retrieval function
+    df = get_attribute_data(GetDataURL)      # Replace with your data retrieval function
+
+    # Rename the DataFrame columns
+    dataKey = AttributeKey
+    df = df.rename(columns={dataKey: FrameworkKey})
+
+    # Perform the join operation
+    geometry = gdf[['geometry', FrameworkKey]]
+    geometry = geometry.merge(df, on=FrameworkKey).reindex(gdf.index)
+
+    # Convert the result to GeoJSON
+    geojson = geometry.to_json()
+
+    return jsonify(geojson)
+#http://127.0.0.1:8000/join_data?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
+
+###################
 
 if __name__ == "__main__":
     #app.run(host='0.0.0.0', port=5000)
