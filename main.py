@@ -133,9 +133,6 @@ def join_data():
 
 ###################
 
-
-app = Flask(__name__)
-
 @app.route('/get_geojson', methods=['GET'])
 def get_geojson():
     # Replace this with your GeoJSON data or load it from a file.
