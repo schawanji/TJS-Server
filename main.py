@@ -132,6 +132,33 @@ def join_data():
 #https://schawanji-tjs-server-demo.up.railway.app/join_data?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
 
 ###################
+
+
+app = Flask(__name__)
+
+@app.route('/get_geojson', methods=['GET'])
+def get_geojson():
+    # Replace this with your GeoJSON data or load it from a file.
+    geojson_data = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-73.9876, 40.7661]
+                },
+                "properties": {
+                    "name": "Sample Location",
+                    "description": "This is a sample GeoJSON point."
+                }
+            }
+        ]
+    }
+
+    return jsonify(geojson_data)
+
+
 if __name__ == "__main__":
     #app.run(host='0.0.0.0', port=5000)
     app.run(debug=True)
