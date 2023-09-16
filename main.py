@@ -29,23 +29,11 @@ def get_framework_key(FrameworkKey, attribute1, attribute2):
 
 
 
-GetDataURL = "https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv"
+GetDataURL = "http://127.0.0.1:8000/static/covid_data.csv"
 FrameworkKey = 'name'
 AttributeKey = 'state'
 FrameworkURI = 'https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json'
 
-
-# Joining operation.
-gdf = get_framework_data(FrameworkURI)
-df = get_attribute_data(GetDataURL)
-dataKey = AttributeKey
-df = df.rename(columns={dataKey: FrameworkKey})
-geometry = gdf[['geometry', FrameworkKey]]
-geometry = geometry.merge(df, on=FrameworkKey).reindex(gdf.index)
-geojson = geometry.to_json()
-print(geojson)
-
-###############################
 
 @app.route('/')
 def index():
@@ -115,6 +103,7 @@ def tjsapi_joindata():
     
 #http://127.0.0.1:8000/tjs/api/joindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
 #http://127.0.0.1:8000/tjs/api/getjoindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name
+
 @app.route('/join_data', methods=['GET'])
 def join_data():
     # Get query parameters from the request
@@ -139,10 +128,10 @@ def join_data():
     geojson = geometry.to_json()
 
     return jsonify(geojson)
-#http://127.0.0.1:8000/join_data?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
+#http://127.0.0.1:8000/join_data?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=http://127.0.0.1:8000/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
+#https://schawanji-tjs-server-demo.up.railway.app/join_data?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
 
 ###################
-
 if __name__ == "__main__":
     #app.run(host='0.0.0.0', port=5000)
     app.run(debug=True)
