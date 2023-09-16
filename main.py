@@ -29,10 +29,10 @@ def get_framework_key(FrameworkKey, attribute1, attribute2):
 
 
 
-GetDataURL = "http://127.0.0.1:8000/static/covid_data.csv"
-FrameworkKey = 'name'
-AttributeKey = 'state'
-FrameworkURI = 'https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json'
+#GetDataURL = "http://127.0.0.1:8000/static/covid_data.csv"
+#FrameworkKey = 'name'
+#AttributeKey = 'state'
+#FrameworkURI = 'https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json'
 
 
 @app.route('/')
@@ -137,14 +137,14 @@ def join_data():
 def get_geojson():
     try:
         # Fetch the GeoJSON data from the URL
-        response = requests.get(FrameworkURI)
+        FrameworkURI = requests.get('FrameworkURI')
         
         # Check if the request was successful (status code 200)
-        if response.status_code == 200:
+        if FrameworkURI.status_code == 200:
             # Set the content type to GeoJSON
-            response.headers['Content-Type'] = 'application/json'
-            # Return the GeoJSON data as a response
-            return response.text
+            FrameworkURI.headers['Content-Type'] = 'application/json'
+            # Return the GeoJSON data as a FrameworkURI
+            return FrameworkURI.text
         else:
             return jsonify({"error": "Failed to fetch GeoJSON data"}), 500
     except Exception as e:
