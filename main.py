@@ -33,7 +33,15 @@ def get_framework_key(FrameworkKey, attribute1, attribute2):
 #FrameworkKey = 'name'
 #AttributeKey = 'state'
 #FrameworkURI = 'https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json'
+#http://127.0.0.1:8000/tjs/api/joindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
+#http://127.0.0.1:8000/tjs/api/getjoindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name
+#http://127.0.0.1:8000/join_data?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=http://127.0.0.1:8000/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
+#https://schawanji-tjs-server-demo.up.railway.app/join_data?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
+#https://web-tjsenv.up.railway.app/tjs/api/joindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
+#curl -X POST -d "frameworkkey=SOVEREIGNT&getframework=https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/10m/cultural/ne_10m_admin_0_countries.json" http://127.0.0.1:8000/tjs/get_framework
+#curl -X POST -d "frameworkkey=SOVEREIGNT&getframework=https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/10m/cultural/ne_10m_admin_0_countries.json" https://schawanji-tjs-server-demo.up.railway.app/tjs/get_framework
 
+####################
 
 @app.route('/')
 def index():
@@ -61,10 +69,6 @@ def get_framework():
     else:
         return "This endpoint only accepts POST requests."
 
-#curl -X POST -d "frameworkkey=SOVEREIGNT&getframework=https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/10m/cultural/ne_10m_admin_0_countries.json" http://127.0.0.1:8000/tjs/get_framework
-#curl -X POST -d "frameworkkey=SOVEREIGNT&getframework=https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/10m/cultural/ne_10m_admin_0_countries.json" https://schawanji-tjs-server-demo.up.railway.app/tjs/get_framework
-
-
 
 @app.route('/tjs/api/getjoindata', methods=['GET'])
 def getjoindata():
@@ -85,12 +89,7 @@ def getjoindata():
 
 
     
-#http://127.0.0.1:8000/tjs/api/joindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
-#http://127.0.0.1:8000/tjs/api/getjoindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name
-#http://127.0.0.1:8000/join_data?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=http://127.0.0.1:8000/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
-#https://schawanji-tjs-server-demo.up.railway.app/join_data?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
-#https://web-tjsenv.up.railway.app/tjs/api/joindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://web-tjsenv.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
-###################
+
 
 @app.route('/tjs/api/joindata', methods=['GET'])
 def joindata():
