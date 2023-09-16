@@ -130,32 +130,46 @@ def join_data():
     return jsonify(geojson)
 #http://127.0.0.1:8000/join_data?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=http://127.0.0.1:8000/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
 #https://schawanji-tjs-server-demo.up.railway.app/join_data?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
-#http://127.0.0.1:8000/get_geojson?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json
+#http://127.0.0.1:8000/get_geojson?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
 ###################
-
 
 @app.route('/get_geojson', methods=['GET'])
 def get_geojson():
     try:
-        # Get the 'url' parameter from the request's query string
+        # Get parameters from the request's query string
         FrameworkURI = request.args.get('FrameworkURI')
+        GetDataURL = request.args.get('GetDataURL')
+        FrameworkKey = request.args.get('FrameworkKey')
+        AttributeKey = request.args.get('AttributeKey')
         
-        if  FrameworkURI:
+        if FrameworkURI:
             # Fetch the GeoJSON data from the specified URL
-            response = requests.get( FrameworkURI)
+            response = requests.get(FrameworkURI)
             
             # Check if the request was successful (status code 200)
             if response.status_code == 200:
+                # Read GeoJSON data into a GeoDataFrame
+                gdf = gpd.read_file(response.text)
+                gdf = gdf[['geometry', 'name']]
+                
+                # Read CSV data into a DataFrame
+                df = pd.read_csv(GetDataURL)
+
+                # Merge GeoDataFrame and DataFrame based on FrameworkKey and AttributeKey
+                merged_data = pd.merge(gdf, df, left_on=FrameworkKey, right_on=AttributeKey, how='inner')
+
                 # Set the content type to GeoJSON
                 response.headers['Content-Type'] = 'application/json'
-                # Return the GeoJSON data as a response
-                return response.text
+
+                # Convert merged_data to GeoJSON format and return as a response
+                geojson = merged_data.to_json()
+                return geojson
             else:
                 return jsonify({"error": "Failed to fetch GeoJSON data"}), 500
         else:
-            return jsonify({"error": "URL parameter 'url' is missing"}), 400
+            return jsonify({"error": "URL parameter 'FrameworkURI' is missing"}), 400
     except Exception as e:
-        return jsonify({"error": str(e)}), 50
+        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == "__main__":
