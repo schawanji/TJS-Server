@@ -135,25 +135,20 @@ def join_data():
 
 @app.route('/get_geojson', methods=['GET'])
 def get_geojson():
-    # Replace this with your GeoJSON data or load it from a file.
-    geojson_data = {
-        "type": "FeatureCollection",
-        "features": [
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [-73.9876, 40.7661]
-                },
-                "properties": {
-                    "name": "Sample Location",
-                    "description": "This is a sample GeoJSON point."
-                }
-            }
-        ]
-    }
-
-    return jsonify(geojson_data)
+    try:
+        # Fetch the GeoJSON data from the URL
+        response = requests.get(FrameworkURI)
+        
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            # Set the content type to GeoJSON
+            response.headers['Content-Type'] = 'application/json'
+            # Return the GeoJSON data as a response
+            return response.text
+        else:
+            return jsonify({"error": "Failed to fetch GeoJSON data"}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == "__main__":
