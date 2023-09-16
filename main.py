@@ -84,57 +84,16 @@ def getjoindata():
     return geojson
 
 
-@app.route('/tjs/api/joindata', methods=['GET'])
-def tjsapi_joindata():
-    # Input parameters required
-    FrameworkURI = request.args.get('FrameworkURI')
-    GetDataURL = request.args.get('GetDataURL')
-    FrameworkKey = request.args.get('FrameworkKey')
-    AttributeKey = request.args.get('AttributeKey')
-    # Joining operation.
-    gdf = get_framework_data(FrameworkURI)
-    df = get_attribute_data(GetDataURL)
-    dataKey = AttributeKey
-    df = df.rename(columns={dataKey: FrameworkKey})
-    geometry = gdf[['geometry', FrameworkKey]]
-    geometry = geometry.merge(df, on=FrameworkKey).reindex(gdf.index)
-    geojson = geometry.to_json()
-    return geojson
     
 #http://127.0.0.1:8000/tjs/api/joindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
 #http://127.0.0.1:8000/tjs/api/getjoindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name
-
-@app.route('/join_data', methods=['GET'])
-def join_data():
-    # Get query parameters from the request
-    FrameworkURI = request.args.get('FrameworkURI')
-    GetDataURL = request.args.get('GetDataURL')
-    FrameworkKey = request.args.get('FrameworkKey')
-    AttributeKey = request.args.get('AttributeKey')
-
-    # Replace this code with your actual data retrieval and joining logic
-    gdf = get_framework_data(FrameworkURI)  # Replace with your data retrieval function
-    df = get_attribute_data(GetDataURL)      # Replace with your data retrieval function
-
-    # Rename the DataFrame columns
-    dataKey = AttributeKey
-    df = df.rename(columns={dataKey: FrameworkKey})
-
-    # Perform the join operation
-    geometry = gdf[['geometry', FrameworkKey]]
-    geometry = geometry.merge(df, on=FrameworkKey).reindex(gdf.index)
-
-    # Convert the result to GeoJSON
-    geojson = geometry.to_json()
-
-    return jsonify(geojson)
 #http://127.0.0.1:8000/join_data?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=http://127.0.0.1:8000/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
 #https://schawanji-tjs-server-demo.up.railway.app/join_data?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
-#http://127.0.0.1:8000/get_geojson?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
+#https://web-tjsenv.up.railway.app/tjs/api/joindata?FrameworkURI=https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json&GetDataURL=https://web-tjsenv.up.railway.app/static/covid_data.csv&FrameworkKey=name&AttributeKey=state
 ###################
 
-@app.route('/get_geojson', methods=['GET'])
-def get_geojson():
+@app.route('/tjs/api/joindata', methods=['GET'])
+def joindata():
     try:
         # Get parameters from the request's query string
         FrameworkURI = request.args.get('FrameworkURI')
