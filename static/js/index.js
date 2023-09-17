@@ -12,5 +12,5 @@ form.addEventListener("submit", (event) => {
 
   const joinData = `${tjsUrl}FrameworkURI=${frameworkData}&GetDataURL=${attributeData}&FrameworkKey=${frameworkKey}&AttributeKey=${attributeKey}`;
 
-  results.innerHTML = `<strong><div>👇🏽</div><div><a href="${joinData}" target="_blank">Link to GeoJSON response</a></div></strong>`;
+  results.innerHTML = `<strong><div>Copy generated URL👇🏽</div><pre> <code> ${joinData}</code></pre></strong>`;
 });

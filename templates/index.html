@@ -1,159 +1,65 @@
-{% extends "base.html"%} {% block content %}
+{% extends "base.html" %}
 
-<div class="container container-flex">
-  <aside class="sidenav">
+{% block content %}
+<main>
+    <h1>TJS-Server: Table Joining Service for Vector Tiles Spatial Framework</h1>
+
+    <p>Welcome to the documentation and demo of the Table Joining Service (TJS) API, which is based on OGC standards. This API allows you to join a geospatial framework with attribute data in tabular format. To learn more about the OGC Table Joining Service, <a href="https://www.ogc.org/standard/tjs/">please follow this link</a>.</p>
+
+    <p>The TJS-Server prototype was developed to explore the potential of utilizing vector tile caches as framework data for a Table Joining Service (TJS) API. This project builds upon the MSC thesis by <a href="https://www.linkedin.com/in/schawanji/">Sharon Chawanji</a>, which can be found <a href="https://cartographymaster.eu/wp-content/theses/2020_Chawanji_Thesis.pdf">here</a>.</p>
+
+    <p>We are actively working on comprehensive documentation for how to use the API. For a preview of its functionality, you can visit the demo page <a href="https://web-tjsenv.up.railway.app/">here</a>. If you wish to set up a local TJS-Server, it is recommended to use a Linux machine. Follow the <a href="https://github.com/schawanji/TJS-Server">Setup Guide</a>. Also, explore the <a href="https://github.com/schawanji/TJS-Server-demonstrator">Git repository</a> for an OpenLayers application to view the joined data. Please note that this TJS-API currently supports only the JoinData operation.</p>
+
+    <p>The TJS-Server API is built using Flask, a Python web framework for creating web apps and web services. Below, we describe the Flask route <code>joindata</code>, which provides the functionality to join GeoJSON and CSV data. To learn more about the OGC Table Joining Service, <a href="https://www.ogc.org/standard/tjs/">please follow this link</a>.</p>
+
+    <h2>Table of Contents</h2>
+    <ol>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#usage">Usage</a>
+            <ul>
+                <li><a href="#endpoint">Endpoint</a></li>
+                <li><a href="#parameters">Parameters</a></li>
+                <li><a href="#making-an-http-request">Making an HTTP Request</a></li>
+                <li><a href="#response">Response</a></li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2 id="overview">Overview</h2>
+    <p>This Flask-based API provides a simple way to join GeoJSON and CSV data based on user-provided parameters. It takes GeoJSON data from a specified URL, combines it with CSV data from another URL, and returns the merged data as a GeoJSON response. The merging is performed based on specified keys in the GeoJSON and CSV data.</p>
+
+    <h2 id="usage">Usage</h2>
+
+    <h3 id="endpoint">Endpoint</h3>
+    <p><strong>Endpoint URL:</strong> /tjs/api/joindata</p>
+    <p><strong>HTTP Method:</strong> GET</p>
+
+    <h3 id="parameters">Parameters</h3>
     <ul>
-      <li><a href="#introduction">Introduction</a></li>
-      <li><a href="#table-joining-service">Table Joning Service</a></li>
-      <li><a href="#attribute-data">Attribute data</a></li>
-      <li>
-        <a href="#framework-data">Framework data</a>
-        <ul>
-          <li><a href="#vector-tiles">Vectortiles</a></li>
-          <li><a href="#vector-tile-caches">Vectortile caches</a></li>
-        </ul>
-      </li>
-
-      <li><a href="#tjs-requests">TJS Get Requests</a></li>
-      <li>
-        <a href="https://vtc-tjs-demo.netlify.app/">
-          Launch Demo Map Application</a
-        >
-      </li>
+        <li><strong>FrameworkURI:</strong> URL of the GeoJSON data to be used as the framework for joining.</li>
+        <li><strong>GetDataURL:</strong> URL of the CSV data to be joined with the GeoJSON data.</li>
+        <li><strong>FrameworkKey:</strong> The key in the GeoJSON data that will be used for merging. This is the common key (geographic identifier) in both attribute data and framework data.</li>
+        <li><strong>AttributeKey:</strong> The key in the CSV data that corresponds to the <code>FrameworkKey</code> for merging.</li>
     </ul>
-  </aside>
 
-  <main>
-    <div id="introduction">
-      <h2>Introduction</h2>
+    <h3 id="making-an-http-request">Making an HTTP Request</h3>
+    <p>You can make a GET request to the <code>/tjs/api/joindata</code> endpoint by specifying the required parameters in the query string of the URL. Here's an example of how to make an HTTP request:</p>
 
-      <p>
-        This is a TJS implementaion prototype that supports join data operation.
-        It was built to examine the potential of using vectortile caches as
-        framework data for an TJS API based on OGC standards. This work is based
-        on a
-        <a
-          href="https://cartographymaster.eu/wp-content/theses/2020_Chawanji_Thesis.pdf"
-          >M.S.c thesis by Sharon Chawanji</a
-        >. This is a documentation on how to use the TJS api.
-      </p>
-    </div>
+    <pre><code>GET /tjs/api/joindata?FrameworkURI=&lt;GeoJSON_URL&gt;&GetDataURL=&lt;CSV_URL&gt;&FrameworkKey=&lt;GeoJSON_Key&gt;&AttributeKey=&lt;CSV_Key&gt;</code></pre>
 
-    <div id="table-joining-service">
-      <h2>OGC Table Joining Service</h2>
-      <p>
-        Table Joining Service is an OGC standard for joining a geospatial
-        framework with attribute data in tabular format.
-      </p>
-    </div>
+    <p>Replace the placeholders with the actual values:</p>
+    <ul>
+        <li><code>&lt;GeoJSON_URL&gt;</code>: URL of the GeoJSON data to be used as the framework.</li>
+        <li><code>&lt;CSV_URL&gt;</code>: URL of the CSV data to be joined.</li>
+        <li><code>&lt;GeoJSON_Key&gt;</code>: The key in the GeoJSON data for merging.</li>
+        <li><code>&lt;CSV_Key&gt;</code>: The corresponding key in the CSV data for merging.</li>
+    </ul>
 
-    <div id="attribute-data">
-      <h2>Attribute data</h2>
-
-      <a href="https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv"
-        >USA Covid-19 data CSV file</a
-      >
-      <a
-        href="https://raw.githubusercontent.com/nytimes/covid-19-data/6a6a67340325c354e9ee4890816718391b47d9ac/us-states.csv"
-        >(Source)</a
-      >
-    </div>
-
-    <div id="framework-data">
-      <h2>Framework data</h2>
-
-      <h2>GeoJSON</h2>
-      <a
-        href="https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json"
-      >
-        USA states json file</a
-      >
-      <a
-        href="https://openlayers.org/en/v4.6.5/examples/data/geojson/countries.geojson"
-      >
-        Countries Geojson file</a
-      >
-      <h2 id="vector-tiles">Vectortiles hosted on Geoserver</h2>
-
-      <div>
-        How to get an overview of all layers published in GeoWebCache <br />
-        <pre>http://localhost:8080/geoserver/gwc/service/tms/1.0.0?</pre>
-      </div>
-      <div>
-        Example HTTP request for viewing metadata about a specific layer<br />
-        <pre>
-          http://localhost:8080/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson</pre
-        >
-      </div>
-    </div>
-    <div id="tjs-requests">
-      <h2>TJS Operations</h2>
-      <p>This TJS prototype supports join data operation</p>
-      <div><strong>JoinData </strong></div>
-      <pre>
-        https://schawanji-tjs-server-demo.up.railway.app/tjs/api/joindata? FrameworkURI={Framework URL}&
-        GetDataURL={Attribute data URL}& FrameworkKey={state}
-      </pre>
-      <div><strong>Parameters</strong></div>
-
-      <div>
-        <span class="tab">FrameworkURL</span> This is the URL to the Framework
-        data example:
-      </div>
-      <pre>
-        http://cartoroom/geoserver/gwc/service/tms/1.0.0/topp%3Astates@EPSG%3A4326@geojson/{x}/{y}/{z}.geojson</pre
-      >
-
-      <div>
-        <span class="tab">GetDataURL</span> This is the URL to the attribute
-        data example
-      </div>
-      <pre>https://schawanji-tjs-server-demo.up.railway.app/static/covid_data.csv</pre>
-
-      <div>
-        <span class="tab">Framework Key</span> This is the name of the common
-        key(geographic identifier):
-      </div>
-      <pre>State name</pre>
-    </div>
-
-    <div class="form">
-      <form
-        id="getframeworkform"
-        action="https://schawanji-tjs-server-demo.up.railway.app/tjs/get_framework"
-        method="post"
-      >
-        <p>Enter Name:</p>
-        <div>
-          <input
-            type="url"
-            id="getframework"
-            name="getframework"
-            class="form-control"
-            placeholder="Enter URL e.g (https://example.geojson)"
-            pattern="https://.*"
-            required
-            size="100"
-            value="https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/10m/cultural/ne_10m_admin_0_countries.json"
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            id="getframeworkkey"
-            name="frameworkkey"
-            required
-            value="SOVEREIGNT"
-            class="form-control"
-            placeholder="Enter Framework Key"
-          />
-        </div>
-        <div class="submit-button">
-          <input type="submit" class="btn" value="GET FRAMEWORK DATA" />
-        </div>
-      </form>
-    </div>
-  </main>
-</div>
+    <h3 id="response">Response</h3>
+    <ul>
+        <li>If the request is successful and data is successfully merged, the API will respond with a GeoJSON representation of the merged data.</li>
+        <li>If there is an issue with fetching the data or merging it, an error message with an appropriate HTTP status code will be returned.</li>
+    </ul>
+</main>
 
 {% endblock %}

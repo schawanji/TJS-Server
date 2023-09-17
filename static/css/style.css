@@ -1,217 +1,206 @@
 /* Reset some default styles */
-body, ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+body,
+h1,
+h2,
+h3,
+ul,
+li {
+    margin: 0;
+    padding: 0;
 }
 
-/* Global styles */
+/* Set a background color and font for the whole page */
 body {
-  margin: 0 auto;
-  line-height: 1.6;
-  font-size: 16px;
-  font-family: Arial, sans-serif;
-  background-color: #f8f8f8;
+    background-color: #f4f4f4;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Center the main content */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* Header styles */
-
+/* Style the header */
 header {
-  background-color: #333; 
-  color: #fff; 
-  padding: 10px 0; 
-  text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
 }
 
-/* Style the site title */
 .site-title h1 {
-  margin: 0;
-  padding: 0;
-  font-size: 24px; 
+    font-size: 24px;
 }
 
 /* Style the navigation menu */
 nav ul {
-  list-style: none;
-  padding: 0;
+    list-style: none;
 }
 
 nav ul li {
-  display: inline;
-}
-
-nav ul li:last-child {
-  margin-right: 0; 
+    display: inline;
+    margin-right: 20px;
 }
 
 nav ul li a {
-  text-decoration: none;
-  color: #fff; 
-  font-weight: bold; 
-  transition: color 0.3s; 
+    text-decoration: none;
+    color: #fff;
 }
 
-nav ul li a:hover {
-  color: #ff4500; 
+/* Style the content area */
+#content {
+    background-color: #fff;
+    padding: 20px;
 }
 
-nav {
-  text-align: center;
-}
-
-nav ul {
-  display: flex;
-  justify-content: center;
-  padding: 0;
-}
-
-nav li {
-  margin-left: 20px;
-}
-
-nav a {
-  text-decoration: none;
-  color: #707070;
-  font-weight: 700;
-  padding: 0.25em 0;
-  transition: color 0.3s ease;
-}
-
-nav a:hover,
-nav a:focus {
-  color: #1792d2;
-}
-
-/* Main and Sidebar styles */
-.container-flex {
-  display: flex;
-  margin: 0 auto;
-}
-
-main {
-  flex: 1;
-  padding: 20px;
-  background-color: #fff;
-}
-
-aside {
-  flex-basis: 30%;
-  max-width: 350px;
-  margin-right: 20px;
-  background-color: #fff;
-}
-
-/* Footer styles */
-
+/* Style the footer */
 footer {
-  background-color: #333;
-  color: #fff;
-  padding: 20px 0;
-  text-align: center;
-}
-
-.footer-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.footer-content p {
-  margin-bottom: 10px;
-  font-size: 16px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
 }
 
 .footer-links {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    margin-top: 10px;
 }
 
 .footer-links li {
-  margin: 10px 0;
+    display: inline;
+    margin-right: 10px;
 }
 
 .footer-links a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+}
+
+/* Style the main container */
+main {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+}
+
+
+
+/* Style the paragraphs */
+p {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+/* Style the links */
+a {
+  color: #007bff;
   text-decoration: none;
-  color: #fff;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
 }
 
-.footer-links svg {
-  margin-left: 10px;
+a:hover {
+  text-decoration: underline;
 }
 
-/* Add hover effect to links */
-.footer-links a:hover {
-  color: #1792d2;
+/* Style the table of contents */
+h2 {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
-/* Copyright text */
-.footer-content p:last-child {
-  font-size: 14px;
+ol {
+  list-style-type: decimal;
+  margin-left: 20px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+/* Style code blocks */
+pre {
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  overflow: auto;
+}
+
+code {
+  font-family: Consolas, Monaco, monospace;
+}
+
+/* Style form elements */
+.form {
   margin-top: 20px;
 }
 
-
-/* Typography */
-a {
-  color: #1792d2;
-  text-decoration: none;
-  transition: color 0.3s ease;
+.form-group {
+  margin-bottom: 20px;
 }
 
-a:hover,
-a:focus {
-  color: #143774;
+label {
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
 }
 
-pre {
-  background-color: #f4f4f4;
+.form-control {
+  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
-  font-family: 'Courier New', Courier, monospace;
-  white-space: pre-wrap; /* Preserve line breaks */
-}
-
-/* Forms */
-form {
-  padding: 20px;
-  background: #f8f8f8;
-  margin: 0 auto;
-  max-width: 400px;
-}
-
-input {
-  padding: 10px;
-  margin-bottom: 15px;
   border-radius: 5px;
-  border: 1px solid gray;
-  width: 100%;
-  font-size: 16px;
+}
+
+/* Style submit button */
+.submit-button {
+  text-align: center;
 }
 
 .btn {
-  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
   padding: 10px 20px;
-  background-color: gray;
-  color: #f8f8f8;
-  text-align: center;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: opacity 0.3s ease;
 }
 
 .btn:hover {
-  opacity: 0.8;
+  background-color: #0056b3;
 }
 
-strong {
-  text-align: center;
+/* Style unordered lists (ul) */
+ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+/* Style ordered lists (ol) */
+ol {
+  list-style-type: decimal;
+  margin-left: 20px;
+}
+
+/* Style list items (li) */
+li {
+  margin-bottom: 5px;
 }

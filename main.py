@@ -108,7 +108,7 @@ def joindata():
             if response.status_code == 200:
                 # Read GeoJSON data into a GeoDataFrame
                 gdf = gpd.read_file(response.text)
-                gdf = gdf[['geometry', 'name']]
+                gdf = gdf[['geometry', FrameworkKey]]
                 
                 # Read CSV data into a DataFrame
                 df = pd.read_csv(GetDataURL)
@@ -131,5 +131,4 @@ def joindata():
 
 
 if __name__ == "__main__":
-    #app.run(host='0.0.0.0', port=5000)
-    app.run(debug=True)
+   app.run(debug=True)
